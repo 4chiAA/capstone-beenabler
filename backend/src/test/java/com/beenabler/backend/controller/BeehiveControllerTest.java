@@ -15,12 +15,14 @@ class BeehiveControllerTest {
 
     private final String BASE_URL = "/api";
     @Autowired
-    private MockMvc mvc;
+    private MockMvc mockMvc;
 
     @Test
     @DirtiesContext
-    void findAllBeehives_whenCalledInitially_thenReturnEmptyList() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get(BASE_URL+"/beehives"))
+    void getAllBeehives_whenCalledInitially_thenReturnEmptyList() throws Exception {
+        //WHEN
+        mockMvc.perform(MockMvcRequestBuilders.get(BASE_URL+"/beehives"))
+                //THEN
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json("[]"));
     }
