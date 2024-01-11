@@ -19,7 +19,7 @@ class BeehiveServiceTest {
     BeehiveService beehiveService = new BeehiveService(beehiveRepo);
 
     @Test
-    void getAllBeehives_whenCalled_thenReturnAllBeehives() {
+    void getAllBeehives_whenCalledWith1Beehive_thenReturnAListWithThatBeehive() {
         //GIVEN
         ZonedDateTime mockCurrentTime = ZonedDateTime.of(2024, 1, 10, 12, 0, 0, 0, ZoneId.systemDefault());
         Clock fixedClock = Clock.fixed(mockCurrentTime.toInstant(), ZoneId.systemDefault());
@@ -35,6 +35,16 @@ class BeehiveServiceTest {
         List<Beehive> expected = List.of(new Beehive("1", fixedDateTime, "First Beehive", "left", BeehiveType.COLONY));
 
         verify(beehiveRepo).findAll();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void getAllBeehives_whenCalledWithNoBeehives_thenReturnEmptyList() {
+        //GIVEN
+        //WHEN
+        List<Beehive> actual = beehiveService.getAllBeehives();
+        //THEN
+        List<Beehive> expected = List.of();
         assertEquals(expected, actual);
     }
 }
