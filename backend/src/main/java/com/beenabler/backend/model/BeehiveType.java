@@ -6,7 +6,7 @@ public enum BeehiveType {
 
     private final String type;
 
-    private BeehiveType(String type){
+    BeehiveType(String type){
         this.type = type;
     }
 }
