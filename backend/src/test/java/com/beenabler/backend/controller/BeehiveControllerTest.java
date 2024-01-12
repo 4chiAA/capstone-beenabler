@@ -13,7 +13,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 @AutoConfigureMockMvc
 class BeehiveControllerTest {
 
-    private final String BASE_URL = "/api";
+    private final String BASE_URL = "/api/beehives";
     @Autowired
     private MockMvc mockMvc;
 
@@ -21,7 +21,7 @@ class BeehiveControllerTest {
     @DirtiesContext
     void getAllBeehives_whenCalledInitially_thenReturnEmptyList() throws Exception {
         //WHEN
-        mockMvc.perform(MockMvcRequestBuilders.get(BASE_URL+"/beehives"))
+        mockMvc.perform(MockMvcRequestBuilders.get(BASE_URL))
                 //THEN
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json("[]"));

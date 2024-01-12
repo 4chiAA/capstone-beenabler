@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/beehives")
 @RequiredArgsConstructor
 public class BeehiveController {
 
     private final BeehiveService beehiveService;
 
-    @GetMapping("/beehives")
+    @GetMapping()
     public List<Beehive> getAllBeehives(){
         return beehiveService.getAllBeehives();
     }
