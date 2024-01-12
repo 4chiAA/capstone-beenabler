@@ -5,11 +5,9 @@ type HomeProps = {
     beehivesPreview: Beehive[]
 }
 
-export default function Home(props: HomeProps){
+export default function Home(props: Readonly<HomeProps>){
 
     return (
-        <>
-            <BeehivePreview beehives={props.beehivesPreview}/>
-        </>
+        <BeehivePreview beehives={props.beehivesPreview}/>
     )
 }

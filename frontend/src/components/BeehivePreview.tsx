@@ -4,15 +4,14 @@ type BeehivePreviewProps = {
     beehives: Beehive[]
 }
 
-export default function BeehivePreview(props: BeehivePreviewProps){
+export default function BeehivePreview(props: Readonly<BeehivePreviewProps>){
 
     if (props.beehives.length === 0) {
         return ("You don't have any beehives")
     }
 
     return (
-        <>
-            <section>
+        <section>
                 {props.beehives.map((beehive: Beehive) => (
                     <article key={beehive.id}>
                         <p>{beehive.name}</p>
@@ -20,8 +19,8 @@ export default function BeehivePreview(props: BeehivePreviewProps){
                         <p>{beehive.type}</p>
                     </article>
                 ))}
-            </section>
-        </>
+        </section>
+
     )
 
 }

@@ -1,5 +1,4 @@
 import './App.css'
-import {Route, Routes} from "react-router-dom";
 import Home from "./pages/Home.tsx";
 import {useEffect, useState} from "react";
 import {Beehive} from "./types/Beehive.ts";
@@ -20,11 +19,7 @@ export default function App() {
   }
 
   return (
-    <>
-      <Routes>
-        <Route path={"/home"} element={<Home beehivesPreview={beehives}/>}/>
-      </Routes>
-    </>
+      <Home beehivesPreview={beehives}/>
   )
 }
 
