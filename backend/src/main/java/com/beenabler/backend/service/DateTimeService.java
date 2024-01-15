@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 public class DateTimeService {
 
     public String dateTimeNow(){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MMMM.yyyy HH:mm");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yy, HH:mm");
         return formatter.format(ZonedDateTime.now());
     }
 }

@@ -6,8 +6,6 @@ import com.beenabler.backend.model.BeehiveType;
 import com.beenabler.backend.repo.BeehiveRepo;
 import org.junit.jupiter.api.Test;
 
-import java.time.Clock;
-import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
 
