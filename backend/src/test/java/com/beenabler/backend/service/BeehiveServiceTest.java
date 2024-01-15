@@ -16,23 +16,22 @@ import static org.mockito.Mockito.*;
 class BeehiveServiceTest {
 
     BeehiveRepo beehiveRepo = mock(BeehiveRepo.class);
-    BeehiveService beehiveService = new BeehiveService(beehiveRepo);
+    IdService idService = new IdService();
+    BeehiveService beehiveService = new BeehiveService(beehiveRepo, idService);
 
     @Test
     void getAllBeehives_whenCalledWith1Beehive_thenReturnAListWithThatBeehive() {
         //GIVEN
-        ZonedDateTime mockCurrentTime = ZonedDateTime.of(2024, 1, 10, 12, 0, 0, 0, ZoneId.systemDefault());
-        Clock fixedClock = Clock.fixed(mockCurrentTime.toInstant(), ZoneId.systemDefault());
-        ZonedDateTime fixedDateTime = ZonedDateTime.now(fixedClock);
+        ZonedDateTime dateTimeNow = ZonedDateTime.now();
 
-        List<Beehive> beehives = List.of(new Beehive("1", fixedDateTime, "First Beehive", "left", BeehiveType.COLONY));
+        List<Beehive> beehives = List.of(new Beehive("1", dateTimeNow, "First Beehive", "left", BeehiveType.COLONY));
         when(beehiveRepo.findAll()).thenReturn(beehives);
 
         //WHEN
         List<Beehive> actual = beehiveService.getAllBeehives();
 
         //THEN
-        List<Beehive> expected = List.of(new Beehive("1", fixedDateTime, "First Beehive", "left", BeehiveType.COLONY));
+        List<Beehive> expected = List.of(new Beehive("1", dateTimeNow, "First Beehive", "left", BeehiveType.COLONY));
 
         verify(beehiveRepo).findAll();
         assertEquals(expected, actual);

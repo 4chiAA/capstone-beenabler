@@ -1,14 +1,10 @@
 package com.beenabler.backend.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.With;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class BeehiveDTO {
-    private String name;
-    private String location;
-    private BeehiveType type;
+@With
+public record BeehiveDTO(
+    String name,
+    String location,
+    BeehiveType type){
 }
