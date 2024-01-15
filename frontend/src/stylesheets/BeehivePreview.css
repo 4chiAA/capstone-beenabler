@@ -1,0 +1,12 @@
+#container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#beehives-container {
+    background-color: darkcyan;
+    color: orange;
+    padding: 10px 20px;
+}
