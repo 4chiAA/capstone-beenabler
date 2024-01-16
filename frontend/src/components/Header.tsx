@@ -3,15 +3,16 @@ export default function Header() {
 
     return (
         <header>
-            <div id="header-container">
-                <div id="logo-container">
+            <div className="header-container">
+                <div className="logo">
                     <img src="src/assets/logo-beenabler.png" alt="Logo"/>
                 </div>
-                <div id="title-container">
+                <div className="title">
                     <h1>BeeNabler</h1>
                 </div>
+                <div className="login"></div>
             </div>
-            <div id="divider"></div>
+            <div className="divider"></div>
         </header>
     );
 }

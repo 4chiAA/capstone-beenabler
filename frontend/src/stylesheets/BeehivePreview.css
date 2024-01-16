@@ -1,12 +1,31 @@
-#container {
+.container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+    padding: 10px 10px;
 }
 
-#beehives-container {
-    background-color: darkcyan;
-    color: orange;
+.beehives-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     padding: 10px 20px;
+}
+
+.beehives {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: hsl(35, 100%, 70%);
+    border: 1px solid;
+    border-radius: 10px;
+}
+
+.beehive-logo img {
+    max-height: 80px;
+}
+
+.beehive-description {
+    color: rgb(0, 100, 150);
+    padding-left: 15px;
+    padding-right: 15px;
 }
