@@ -15,6 +15,10 @@ export default function BeehivePreview(props: Readonly<BeehivePreviewProps>) {
     return (
         <div className="container">
             <Header/>
+            <div className="title-container">
+                <h2>Deine Bienenvölker</h2>
+                <div className="divider"></div>
+            </div>
             <div className="beehives-container">
                 {props.beehives.map((beehive: Beehive) => (
                 <article className="beehives"  key={beehive.id}>
@@ -29,6 +33,7 @@ export default function BeehivePreview(props: Readonly<BeehivePreviewProps>) {
                 </article>
                 ))}
             </div>
+            <button>Add</button>
         </div>
 
     )
