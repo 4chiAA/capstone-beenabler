@@ -18,8 +18,12 @@ p {
     margin: 0 0 4px;
 }
 
+.page-container {
+    padding: 15px 15px;
+}
+
 .title-container {
-    padding: 5px;
+    padding: 0 5px;
 }
 
 .title-container h2 {

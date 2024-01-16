@@ -1,25 +1,18 @@
-import "../stylesheets/BeehivePreview.css";
+import "../stylesheets/PreviewBeehives.css";
 import {Beehive} from "../types/Beehive.ts";
-import Header from "./Header.tsx";
 
 type BeehivePreviewProps = {
     beehives: Beehive[]
 }
 
-export default function BeehivePreview(props: Readonly<BeehivePreviewProps>) {
+export default function PreviewBeehives(props: Readonly<BeehivePreviewProps>) {
 
     if (props.beehives.length === 0) {
         return ("Du hast noch kein Bienenvolk angelegt")
     }
 
     return (
-        <div className="container">
-            <Header/>
-            <div className="title-container">
-                <h2>Deine Bienenvölker</h2>
-                <div className="divider"></div>
-            </div>
-            <div className="beehives-container">
+        <div className="beehives-container">
                 {props.beehives.map((beehive: Beehive) => (
                 <article className="beehives"  key={beehive.id}>
                     <div className="beehive-logo">
@@ -32,9 +25,6 @@ export default function BeehivePreview(props: Readonly<BeehivePreviewProps>) {
                     </div>
                 </article>
                 ))}
-            </div>
-            <button>Add</button>
         </div>
-
     )
 }
