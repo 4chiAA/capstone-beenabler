@@ -1,7 +1,7 @@
 export type Beehive = {
-    id: string,
-    dateTime: string,
+    id?: string,
+    dateTime?: string,
     name: string,
-    location?: string,
+    location: string,
     type: string
 }
