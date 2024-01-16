@@ -3,9 +3,7 @@ package com.beenabler.backend.model;
 import lombok.With;
 
 @With
-public record Beehive (
-    String id,
-    String dateTime,
+public record BeehiveDTO(
     String name,
     String location,
     BeehiveType type){
