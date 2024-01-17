@@ -1,3 +1,4 @@
+import "../stylesheets/FormCreate.css";
 import axios from "axios";
 import {Beehive} from "../types/Beehive.ts";
 import {ChangeEvent, FormEvent, useState} from "react";
@@ -63,8 +64,7 @@ export default function FormCreate() {
 
     return (
         <div className="form-create-container">
-            <div className="new-beehive">
-                <form onSubmit={createNewBeehive}>
+            <form className="new-beehive" onSubmit={createNewBeehive}>
                     <p>Name</p>
                     <input
                         type={"text"}
@@ -81,12 +81,11 @@ export default function FormCreate() {
                         <option value="Wirtschaftsvolk">Wirtschaftsvolk</option>
                         <option value="Jungvolk">Jungvolk</option>
                     </select>
-                    <div>
-                        <button type="submit">Bienenvolk erstellen</button>
+                    <div className="new-beehive buttons">
                         <button type="button" onClick={cancelCreation}>Abbrechen</button>
+                        <button type="submit">Bienenvolk erstellen</button>
                     </div>
-                </form>
-            </div>
+            </form>
         </div>
     )
 }

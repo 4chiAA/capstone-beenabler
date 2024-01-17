@@ -1,16 +1,28 @@
 .form-create-container {
-    display: grid;
+    display: flex;
     justify-content: center;
+    margin-top: 20px;
+    background-color: hsl(35, 100%, 70%);
+    border: 1px solid;
+    border-radius: 10px;
+
 }
 .new-beehive {
-    border: solid 1px black;
-    border-radius: 5px;
-    height: 120px;
-    margin-bottom: 30px;
-    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
 }
 
 .new-beehive input {
     height: 20px;
     margin-bottom: 10px;
+}
+
+.new-beehive select {
+    height: 20px;
+    margin-bottom: 10px;
+}
+
+.new-beehive .buttons {
+    gap: 20px;
 }
