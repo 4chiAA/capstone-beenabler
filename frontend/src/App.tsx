@@ -21,13 +21,10 @@ export default function App() {
   }
 
   return (
-      <>
         <Routes>
           <Route path={"/home"} element={<Home beehivesPreview={beehives}/>}/>
           <Route path={"/create"} element={<CreateBeehive/>}/>
         </Routes>
-      </>
-
   )
 }
 
