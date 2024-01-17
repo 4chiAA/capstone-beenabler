@@ -1,5 +1,14 @@
 .page-container {
+    display: flex;
+    flex-direction: column;
     padding: 15px 15px;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.wrapper {
+    flex: 1;
+    overflow: auto;
 }
 
 .title-container {

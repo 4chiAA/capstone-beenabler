@@ -1,0 +1,25 @@
+footer {
+    display: flex;
+    flex-direction: column;
+    padding: 25px 25px;
+    position: fixed;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 99;
+}
+
+.footer-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 95%;
+}
+
+.left {
+    width: 50px;
+}
+
+.mid {
+    width: 50px;
+}
