@@ -2,7 +2,6 @@ package com.beenabler.backend.service;
 
 import com.beenabler.backend.model.Beehive;
 import com.beenabler.backend.model.BeehiveDTO;
-import com.beenabler.backend.model.BeehiveType;
 import com.beenabler.backend.repo.BeehiveRepo;
 import org.junit.jupiter.api.Test;
 
@@ -24,14 +23,14 @@ class BeehiveServiceTest {
         //GIVEN
         String dateTimeNow = ZonedDateTime.now().toString();
 
-        List<Beehive> beehives = List.of(new Beehive("1", dateTimeNow, "First Beehive", "left", BeehiveType.COLONY));
+        List<Beehive> beehives = List.of(new Beehive("1", dateTimeNow, "First Beehive", "left", "COLONY"));
         when(beehiveRepo.findAll()).thenReturn(beehives);
 
         //WHEN
         List<Beehive> actual = beehiveService.getAllBeehives();
 
         //THEN
-        List<Beehive> expected = List.of(new Beehive("1", dateTimeNow, "First Beehive", "left", BeehiveType.COLONY));
+        List<Beehive> expected = List.of(new Beehive("1", dateTimeNow, "First Beehive", "left", "COLONY"));
 
         verify(beehiveRepo).findAll();
         assertEquals(expected, actual);
@@ -50,8 +49,8 @@ class BeehiveServiceTest {
     @Test
     void saveBeehive_whenSaveNewBeehive_thenReturnSavedBeehive() {
         //GIVEN
-        BeehiveDTO beehiveDTO = new BeehiveDTO("Second Beehive", "under the tree", BeehiveType.NUCLEUS);
-        Beehive beehiveToSave = new Beehive("2", "15.01.2024 11:00", "Second Beehive", "under the tree", BeehiveType.NUCLEUS);
+        BeehiveDTO beehiveDTO = new BeehiveDTO("Second Beehive", "under the tree", "NUCLEUS");
+        Beehive beehiveToSave = new Beehive("2", "15.01.2024 11:00", "Second Beehive", "under the tree", "NUCLEUS");
         System.out.println(beehiveDTO);
         System.out.println(beehiveToSave);
 
@@ -61,7 +60,7 @@ class BeehiveServiceTest {
         //WHEN
         Beehive actual = beehiveService.saveBeehive(beehiveDTO);
         //THEN
-        Beehive expected = new Beehive("2", "15.01.2024 11:00", "Second Beehive", "under the tree", BeehiveType.NUCLEUS);
+        Beehive expected = new Beehive("2", "15.01.2024 11:00", "Second Beehive", "under the tree", "NUCLEUS");
         verify(beehiveRepo).save(beehiveToSave);
         assertEquals(expected, actual);
     }

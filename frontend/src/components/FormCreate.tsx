@@ -17,16 +17,30 @@ export default function FormCreate() {
         setInputLocation(event.target.value)
     }
 
-    function createInputType(event: ChangeEvent<HTMLInputElement>) {
+    function createInputType(event: ChangeEvent<HTMLSelectElement>) {
         setInputType(event.target.value)
     }
 
     function createBeehive(newBeehive: Beehive) {
+        if (!newBeehive.name || !newBeehive.location || !newBeehive.type) {
+            alert("Bitte fülle alle Felder aus");
+            return;
+        }
+
         axios.post<Beehive>("/api/beehives", newBeehive)
             .then(response => {
                 alert("Neues Bienenvolk \"" + response.data.name + "\" wurde erstellt");
+                window.location.href = "/home";
             })
-            .catch((error) => alert(error.message))
+            .catch((error) => {
+                if (error.response) {
+                    alert("Fehler vom Server: " + error.response.data);
+                } else if (error.request) {
+                    alert("Keine Antwort vom Server erhalten");
+                } else {
+                    alert("Fehler beim Request: " + error.message);
+                }
+            });
     }
 
     function createNewBeehive(event: FormEvent<HTMLFormElement>) {
@@ -37,8 +51,14 @@ export default function FormCreate() {
                 location: inputLocation,
                 type: inputType
             }
+        console.log("Werte vor dem Versenden:", newBeehive); // Füge diese Zeile hinzu
+
         createBeehive(newBeehive)
-        setInputName("")
+        setInputType("")
+    }
+
+    function cancelCreation() {
+        window.location.href = "/home";
     }
 
     return (
@@ -56,12 +76,14 @@ export default function FormCreate() {
                         value={inputLocation}
                         onChange={createInputLocation}/>
                     <p>Typ</p>
-                    <input
-                        type={"text"}
-                        value={inputType}
-                        onChange={createInputType}/>
+                    <select value={inputType} onChange={createInputType}>
+                        <option value="">Bitte wählen</option>
+                        <option value="Wirtschaftsvolk">Wirtschaftsvolk</option>
+                        <option value="Jungvolk">Jungvolk</option>
+                    </select>
                     <div>
-                        <button>Create your To-do</button>
+                        <button type="submit">Bienenvolk erstellen</button>
+                        <button type="button" onClick={cancelCreation}>Abbrechen</button>
                     </div>
                 </form>
             </div>

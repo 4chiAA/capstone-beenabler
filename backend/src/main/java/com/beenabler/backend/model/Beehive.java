@@ -8,5 +8,5 @@ public record Beehive (
     String dateTime,
     String name,
     String location,
-    BeehiveType type){
+    String type){
 }

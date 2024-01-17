@@ -21,7 +21,7 @@ export default function PreviewBeehives(props: Readonly<BeehivePreviewProps>) {
                     <div className="beehive-description">
                         <h3>{beehive.name}</h3>
                         <p>{beehive.type}</p>
-                        <p>Update: {beehive.dateTime}</p>
+                        <p className="dateTime">Update: {beehive.dateTime}</p>
                     </div>
                 </article>
                 ))}
