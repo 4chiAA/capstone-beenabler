@@ -1,5 +1,6 @@
 package com.beenabler.backend.service;
 
+import com.beenabler.backend.exception.BeehiveNotFoundException;
 import com.beenabler.backend.model.Beehive;
 import com.beenabler.backend.model.BeehiveDTO;
 import com.beenabler.backend.repo.BeehiveRepo;
@@ -7,8 +8,9 @@ import org.junit.jupiter.api.Test;
 
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class BeehiveServiceTest {
@@ -22,19 +24,45 @@ class BeehiveServiceTest {
     void getAllBeehives_whenCalledWith1Beehive_thenReturnAListWithThatBeehive() {
         //GIVEN
         String dateTimeNow = ZonedDateTime.now().toString();
-
-        List<Beehive> beehives = List.of(new Beehive("1", dateTimeNow, "First Beehive", "left", "COLONY"));
+        List<Beehive> beehives = List.of(new Beehive("1", dateTimeNow, "First Beehive", "left", "Colony"));
         when(beehiveRepo.findAll()).thenReturn(beehives);
-
         //WHEN
         List<Beehive> actual = beehiveService.getAllBeehives();
-
         //THEN
-        List<Beehive> expected = List.of(new Beehive("1", dateTimeNow, "First Beehive", "left", "COLONY"));
+        List<Beehive> expected = List.of(new Beehive("1", dateTimeNow, "First Beehive", "left", "Colony"));
 
         verify(beehiveRepo).findAll();
         assertEquals(expected, actual);
     }
+
+    @Test
+    void getBeehiveById_whenCalledBeehiveId_thenReturnThisBeehive() throws BeehiveNotFoundException {
+        //GIVEN
+        String id = "1";
+        DateTimeService dateTimeService = new DateTimeService();
+        Beehive expected = new Beehive("1", dateTimeService.dateTimeNow(), "My Beehive", "last spot", "Colony");
+        when(beehiveRepo.findById(id)).thenReturn(Optional.of(expected));
+        //WHEN
+        Beehive actual = beehiveService.getBeehiveById(id);
+        //THEN
+        verify(beehiveRepo).findById(id);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void getBeehiveById_whenCalledWithInvalidId_thenThrowBeehiveNotFoundException() throws BeehiveNotFoundException {
+        //GIVEN
+        String id = "1";
+        //WHEN
+        //THEN
+        try {
+            beehiveService.getBeehiveById(id);
+            fail();
+        } catch (BeehiveNotFoundException e) {
+            assertTrue(true);
+        }
+    }
+
 
     @Test
     void getAllBeehives_whenCalledWithNoBeehives_thenReturnEmptyList() {
@@ -49,10 +77,8 @@ class BeehiveServiceTest {
     @Test
     void saveBeehive_whenSaveNewBeehive_thenReturnSavedBeehive() {
         //GIVEN
-        BeehiveDTO beehiveDTO = new BeehiveDTO("Second Beehive", "under the tree", "NUCLEUS");
-        Beehive beehiveToSave = new Beehive("2", "15.01.2024 11:00", "Second Beehive", "under the tree", "NUCLEUS");
-        System.out.println(beehiveDTO);
-        System.out.println(beehiveToSave);
+        BeehiveDTO beehiveDTO = new BeehiveDTO("Second Beehive", "under the tree", "Nucleus");
+        Beehive beehiveToSave = new Beehive("2", "15.01.2024 11:00", "Second Beehive", "under the tree", "Nucleus");
 
         when(beehiveRepo.save(beehiveToSave)).thenReturn(beehiveToSave);
         when(idService.randomID()).thenReturn("2");
@@ -60,7 +86,7 @@ class BeehiveServiceTest {
         //WHEN
         Beehive actual = beehiveService.saveBeehive(beehiveDTO);
         //THEN
-        Beehive expected = new Beehive("2", "15.01.2024 11:00", "Second Beehive", "under the tree", "NUCLEUS");
+        Beehive expected = new Beehive("2", "15.01.2024 11:00", "Second Beehive", "under the tree", "Nucleus");
         verify(beehiveRepo).save(beehiveToSave);
         assertEquals(expected, actual);
     }

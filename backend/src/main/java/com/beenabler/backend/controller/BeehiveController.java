@@ -1,5 +1,6 @@
 package com.beenabler.backend.controller;
 
+import com.beenabler.backend.exception.BeehiveNotFoundException;
 import com.beenabler.backend.model.Beehive;
 import com.beenabler.backend.model.BeehiveDTO;
 import com.beenabler.backend.service.BeehiveService;
@@ -21,7 +22,7 @@ public class BeehiveController {
     }
 
     @GetMapping("/{id}")
-    public Beehive getBeehiveById(@PathVariable String id) {
+    public Beehive getBeehiveById(@PathVariable String id) throws BeehiveNotFoundException {
         return beehiveService.getBeehiveById(id);
     }
 

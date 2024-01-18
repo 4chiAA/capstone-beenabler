@@ -1,5 +1,6 @@
 package com.beenabler.backend.service;
 
+import com.beenabler.backend.exception.BeehiveNotFoundException;
 import com.beenabler.backend.model.Beehive;
 import com.beenabler.backend.model.BeehiveDTO;
 import com.beenabler.backend.repo.BeehiveRepo;
@@ -20,9 +21,9 @@ public class BeehiveService {
         return beehiveRepo.findAll();
     }
 
-    public Beehive getBeehiveById(String id) {
+    public Beehive getBeehiveById(String id) throws BeehiveNotFoundException {
         return beehiveRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Not Found"));
+                .orElseThrow(() -> new BeehiveNotFoundException("Beehive not Found"));
     }
 
     public Beehive saveBeehive(BeehiveDTO beehiveDTO) {
