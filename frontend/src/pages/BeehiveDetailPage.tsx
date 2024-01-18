@@ -21,7 +21,4 @@ export default function BeehiveDetailPage(props: BeehiveDetailPageProps) {
             </div>
         </div>
     )
-
-
-
 }
