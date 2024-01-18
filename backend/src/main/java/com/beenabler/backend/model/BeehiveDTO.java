@@ -6,5 +6,5 @@ import lombok.With;
 public record BeehiveDTO(
     String name,
     String location,
-    BeehiveType type){
+    String type){
 }

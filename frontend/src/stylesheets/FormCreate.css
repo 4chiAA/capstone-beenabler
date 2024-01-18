@@ -1,0 +1,28 @@
+.form-create-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    background-color: hsl(35, 100%, 70%);
+    border: 1px solid;
+    border-radius: 10px;
+
+}
+.new-beehive {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+}
+
+.new-beehive input {
+    height: 20px;
+    margin-bottom: 10px;
+}
+
+.new-beehive select {
+    height: 20px;
+    margin-bottom: 10px;
+}
+
+.new-beehive .buttons {
+    gap: 20px;
+}

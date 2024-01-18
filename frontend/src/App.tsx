@@ -3,6 +3,8 @@ import Home from "./pages/Home.tsx";
 import {useEffect, useState} from "react";
 import {Beehive} from "./types/Beehive.ts";
 import axios from "axios";
+import {Route, Routes} from "react-router-dom";
+import CreateBeehive from "./pages/CreateBeehive.tsx";
 
 export default function App() {
 
@@ -19,7 +21,10 @@ export default function App() {
   }
 
   return (
-      <Home beehivesPreview={beehives}/>
+        <Routes>
+          <Route path={"/home"} element={<Home beehivesPreview={beehives}/>}/>
+          <Route path={"/create"} element={<CreateBeehive/>}/>
+        </Routes>
   )
 }
 

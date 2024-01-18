@@ -2,7 +2,6 @@ package com.beenabler.backend.controller;
 
 import com.beenabler.backend.model.Beehive;
 import com.beenabler.backend.model.BeehiveDTO;
-import com.beenabler.backend.model.BeehiveType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +43,7 @@ class BeehiveControllerTest {
     @DirtiesContext
     void getAllBeehives_whenBeehiveWithId1IsGiven_thenReturnListWithBeehive1() throws Exception {
         //GIVEN
-        BeehiveDTO firstBeehiveDTO = new BeehiveDTO("First Beehive", "left", BeehiveType.COLONY);
+        BeehiveDTO firstBeehiveDTO = new BeehiveDTO("First Beehive", "left", "COLONY");
         String firstBeehiveDTOJson = objectMapper.writeValueAsString(firstBeehiveDTO);
 
         MvcResult result = mockMvc.perform(post(BASE_URL)
@@ -65,7 +64,7 @@ class BeehiveControllerTest {
     @Test
     void saveBeehive_whenABeehiveIsSaved_thenReturnSavedBeehive() throws Exception {
         //GIVEN
-        BeehiveDTO beehiveDTO = new BeehiveDTO("crazy bees", "up hill", BeehiveType.NUCLEUS);
+        BeehiveDTO beehiveDTO = new BeehiveDTO("crazy bees", "up hill", "NUCLEUS");
         System.out.println(beehiveDTO);
         //WHEN
         mockMvc.perform(post(BASE_URL)
