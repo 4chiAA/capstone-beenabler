@@ -15,8 +15,8 @@ export default function BeehivesPreview(props: Readonly<BeehivePreviewProps>) {
     return (
         <div className="beehives-preview-container">
                 {props.beehives.map((beehive: Beehive) => (
-                <Link to={"/beehive/" + beehive.id} style={{textDecoration: "none", color: "inherit"}}>
-                    <article className="beehives-preview"  key={beehive.id}>
+                <Link key={beehive.id} to={"/beehive/" + beehive.id} style={{textDecoration: "none", color: "inherit"}}>
+                    <article className="beehives-preview">
                         <div className="logo">
                             <img src="src/assets/beehive_preview.png" alt="Logo"/>
                         </div>

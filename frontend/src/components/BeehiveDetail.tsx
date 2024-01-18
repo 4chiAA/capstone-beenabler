@@ -8,7 +8,7 @@ type BeehiveDetailProps = {
     fetchBeehiveById: (id: string) => void
 }
 
-export default function BeehiveDetail(props: BeehiveDetailProps) {
+export default function BeehiveDetail(props: Readonly<BeehiveDetailProps>) {
 
     const {id} = useParams();
 

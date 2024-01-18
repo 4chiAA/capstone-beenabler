@@ -7,7 +7,7 @@ type BeehiveDetailPageProps = {
     fetchBeehiveById: (id: string) => void
 }
 
-export default function BeehiveDetailPage(props: BeehiveDetailPageProps) {
+export default function BeehiveDetailPage(props: Readonly<BeehiveDetailPageProps>) {
 
     return (
         <div className="page-container">
