@@ -23,7 +23,7 @@ public class BeehiveService {
 
     public Beehive getBeehiveById(String id) throws BeehiveNotFoundException {
         return beehiveRepo.findById(id)
-                .orElseThrow(() -> new BeehiveNotFoundException("Beehive not Found"));
+                .orElseThrow(() -> new BeehiveNotFoundException("Beehive not found"));
     }
 
     public Beehive saveBeehive(BeehiveDTO beehiveDTO) {

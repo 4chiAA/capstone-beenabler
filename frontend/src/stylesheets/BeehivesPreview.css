@@ -1,0 +1,29 @@
+.beehives-preview-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 20px;
+}
+
+.beehives-preview {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: hsl(35, 100%, 70%);
+    border: 1px solid;
+    border-radius: 10px;
+}
+
+.beehives-preview .logo img {
+    max-height: 80px;
+}
+
+.beehives-preview .description {
+    color: rgb(0, 100, 150);
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.beehives-preview .description .dateTime{
+    font-size: 12px;
+}

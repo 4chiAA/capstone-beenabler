@@ -1,11 +1,11 @@
-.beehives-container {
+.beehive-container {
     display: flex;
     flex-direction: column;
     gap: 10px;
     padding: 10px 20px;
 }
 
-.beehives {
+.beehive {
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -14,16 +14,16 @@
     border-radius: 10px;
 }
 
-.beehive-logo img {
+.beehive .logo img {
     max-height: 80px;
 }
 
-.beehive-description {
+.beehive .description {
     color: rgb(0, 100, 150);
     padding-left: 15px;
     padding-right: 15px;
 }
 
-.beehive-description .dateTime{
+.beehive .description .dateTime{
     font-size: 12px;
 }

@@ -1,6 +1,6 @@
-import "../stylesheets/Home.css";
+import "../stylesheets/HomePage.css";
 import {Beehive} from "../types/Beehive.ts";
-import PreviewBeehives from "../components/PreviewBeehives.tsx";
+import BeehivesPreview from "../components/BeehivesPreview.tsx";
 import Header from "../components/Header.tsx";
 import {Link} from "react-router-dom";
 import FooterHome from "../components/FooterHome.tsx";
@@ -9,7 +9,7 @@ type HomeProps = {
     beehivesPreview: Beehive[]
 }
 
-export default function Home(props: Readonly<HomeProps>){
+export default function HomePage(props: Readonly<HomeProps>){
 
     return (
         <div className="page-container">
@@ -19,7 +19,7 @@ export default function Home(props: Readonly<HomeProps>){
                 <h2>Deine Bienenvölker</h2>
                 <div className="divider"></div>
             </div>
-            <PreviewBeehives beehives={props.beehivesPreview}/>
+            <BeehivesPreview beehives={props.beehivesPreview}/>
             <Link className="create-button-home" to="/create">
                 <button className="create-button">+</button>
             </Link>
