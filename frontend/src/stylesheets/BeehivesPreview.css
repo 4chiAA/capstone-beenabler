@@ -12,6 +12,7 @@
     background-color: hsl(35, 100%, 70%);
     border: 1px solid;
     border-radius: 10px;
+    color: inherit;
 }
 
 .beehives-preview .logo img {

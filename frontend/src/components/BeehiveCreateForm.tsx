@@ -52,10 +52,7 @@ export default function BeehiveCreateForm() {
                 location: inputLocation,
                 type: inputType
             }
-        console.log("Werte vor dem Versenden:", newBeehive); // Füge diese Zeile hinzu
-
-        createBeehive(newBeehive)
-        setInputType("")
+          createBeehive(newBeehive)
     }
 
     function cancelCreation() {
