@@ -20,6 +20,11 @@ public class BeehiveController {
         return beehiveService.getAllBeehives();
     }
 
+    @GetMapping("/{id}")
+    public Beehive getBeehiveById(@PathVariable String id) {
+        return beehiveService.getBeehiveById(id);
+    }
+
     @PostMapping
     public Beehive saveBeehive (@RequestBody BeehiveDTO beehive){
         return beehiveService.saveBeehive(beehive);

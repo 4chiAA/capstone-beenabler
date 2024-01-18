@@ -20,6 +20,11 @@ public class BeehiveService {
         return beehiveRepo.findAll();
     }
 
+    public Beehive getBeehiveById(String id) {
+        return beehiveRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Not Found"));
+    }
+
     public Beehive saveBeehive(BeehiveDTO beehiveDTO) {
         Beehive newBeehive = new Beehive(idService.randomID(), dateTimeService.dateTimeNow(), beehiveDTO.name(), beehiveDTO.location(), beehiveDTO.type());
         return beehiveRepo.save(newBeehive);
