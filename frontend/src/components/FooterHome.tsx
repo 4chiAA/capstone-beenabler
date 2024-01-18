@@ -1,5 +1,5 @@
 import "../stylesheets/FooterHome.css";
-import {Link} from "react-router-dom";
+import BeehiveCreateButton from "./BeehiveCreateButton.tsx";
 export default function FooterHome() {
 
     return (
@@ -8,9 +8,7 @@ export default function FooterHome() {
             <div className="footer-container">
                 <div className="left"></div>
                 <div className="mid"></div>
-                <Link to="/create">
-                    <button className="create-button">+</button>
-                </Link>
+                <BeehiveCreateButton/>
             </div>
         </footer>
     );

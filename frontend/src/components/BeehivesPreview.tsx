@@ -1,5 +1,6 @@
 import "../stylesheets/BeehivesPreview.css";
 import {Beehive} from "../types/Beehive.ts";
+import {Link} from "react-router-dom";
 
 type BeehivePreviewProps = {
     beehives: Beehive[]
@@ -16,10 +17,12 @@ export default function BeehivesPreview(props: Readonly<BeehivePreviewProps>) {
                 {props.beehives.map((beehive: Beehive) => (
                 <article className="beehives-preview"  key={beehive.id}>
                     <div className="logo">
-                        <img src="src/assets/beehive_preview.png" alt="Logo"/>
+                        <Link to={"/beehive/" + beehive.id}><img src="src/assets/beehive_preview.png" alt="Logo"/>
+                        </Link>
                     </div>
                     <div className="description">
-                        <h3>{beehive.name}</h3>
+                        <Link to={"/beehive/" + beehive.id}><h3>{beehive.name}</h3>
+                        </Link>
                         <p>{beehive.type}</p>
                         <p className="dateTime">Update: {beehive.dateTime}</p>
                     </div>
