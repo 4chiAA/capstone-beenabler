@@ -30,4 +30,8 @@ public class BeehiveService {
         Beehive newBeehive = new Beehive(idService.randomID(), dateTimeService.dateTimeNow(), beehiveDTO.name(), beehiveDTO.location(), beehiveDTO.type());
         return beehiveRepo.save(newBeehive);
     }
+
+    public void deleteBeehive(String id) {
+        beehiveRepo.deleteById(id);
+    }
 }
