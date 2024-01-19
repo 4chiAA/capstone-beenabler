@@ -1,10 +1,10 @@
-import "../stylesheets/FormCreate.css";
+import "../stylesheets/BeehiveCreateForm.css";
 import axios from "axios";
 import {Beehive} from "../types/Beehive.ts";
 import {ChangeEvent, FormEvent, useState} from "react";
 
 
-export default function FormCreate() {
+export default function BeehiveCreateForm() {
 
     const [inputName, setInputName] = useState<string>("")
     const [inputLocation, setInputLocation] = useState<string>("")
@@ -52,10 +52,7 @@ export default function FormCreate() {
                 location: inputLocation,
                 type: inputType
             }
-        console.log("Werte vor dem Versenden:", newBeehive); // Füge diese Zeile hinzu
-
-        createBeehive(newBeehive)
-        setInputType("")
+          createBeehive(newBeehive)
     }
 
     function cancelCreation() {

@@ -12,10 +12,8 @@ class IdServiceTest {
     void randomID_whenRandomIDCalled_thenValidUUIDReturned() {
         // GIVEN
         IdService idService = new IdService();
-
         // WHEN
         String actual = idService.randomID();
-
         // THEN
         assertNotNull(actual);
         assertTrue(isValidUUID(actual));

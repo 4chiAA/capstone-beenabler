@@ -16,7 +16,10 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.List;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -58,6 +61,40 @@ class BeehiveControllerTest {
                 //THEN
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().json(beehivesAsJson));
+    }
+
+    @DirtiesContext
+    @Test
+    void getBeehiveById_whenBeehiveWithIdIsGiven_thenReturnThisBeehive() throws Exception {
+        //GIVEN
+        BeehiveDTO secondBeehiveDTO = new BeehiveDTO("Second Beehive", "right", "COLONY");
+        String secondBeehiveDTOJson = objectMapper.writeValueAsString(secondBeehiveDTO);
+
+        String actual = mockMvc.perform(post(BASE_URL)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(secondBeehiveDTOJson))
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+
+        Beehive actualBeehive = objectMapper.readValue(actual, Beehive.class);
+        String id = actualBeehive.id();
+        String dateTime = actualBeehive.dateTime();
+        //WHEN
+        mockMvc.perform(get(BASE_URL + "/" + id))
+                //THEN
+                .andExpect(status().isOk())
+                .andExpect(content().json("""
+                {
+                    "id": "<ID>",
+                    "dateTime": "<DATETIME>",
+                    "name": "Second Beehive",
+                    "location": "right",
+                    "type": "COLONY"
+                }
+                """.replaceFirst("<ID>", id)
+                        .replaceFirst("<DATETIME>", dateTime)));
     }
 
     @DirtiesContext

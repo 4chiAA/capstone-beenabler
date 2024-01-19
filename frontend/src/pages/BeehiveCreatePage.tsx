@@ -1,7 +1,7 @@
 import Header from "../components/Header.tsx";
-import FormCreate from "../components/FormCreate.tsx";
+import BeehiveCreateForm from "../components/BeehiveCreateForm.tsx";
 
-export default function CreateBeehive(){
+export default function BeehiveCreatePage(){
 
     return (
         <div className="page-container">
@@ -10,7 +10,7 @@ export default function CreateBeehive(){
                 <h2>Bienenvolk erstellen</h2>
                 <div className="divider"></div>
             </div>
-            <FormCreate/>
+            <BeehiveCreateForm/>
         </div>
     )
 }
