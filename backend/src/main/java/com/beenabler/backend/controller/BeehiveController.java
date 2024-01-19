@@ -31,8 +31,8 @@ public class BeehiveController {
         return beehiveService.saveBeehive(beehive);
     }
 
-    @DeleteMapping("{id}")
-    void deleteBeehive (@PathVariable String id) {
+    @DeleteMapping("/{id}")
+    public void deleteBeehive (@PathVariable String id) throws BeehiveNotFoundException {
         beehiveService.deleteBeehive(id);
     }
 }

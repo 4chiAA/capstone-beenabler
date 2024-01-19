@@ -17,20 +17,26 @@ class BeehiveServiceTest {
 
     BeehiveRepo beehiveRepo = mock(BeehiveRepo.class);
     IdService idService = mock(IdService.class);
-    DateTimeService dateTimeService = mock(DateTimeService.class);
+    DateTimeService dateTimeService = spy(new DateTimeService());
     BeehiveService beehiveService = new BeehiveService(beehiveRepo, idService, dateTimeService);
+
+    String beehiveId = "1";
+    String beehiveDateTime = dateTimeService.dateTimeNow();
+    String beehiveName = "Buzzing";
+    String beehiveLocation = "under the tree";
+    String beehiveType = "Colony";
+    Beehive testBeehive = new Beehive(beehiveId, beehiveDateTime, beehiveName, beehiveLocation, beehiveType);
+    BeehiveDTO beehiveTestDto = new BeehiveDTO(beehiveName, beehiveLocation, beehiveType);
 
     @Test
     void getAllBeehives_whenCalledWith1Beehive_thenReturnAListWithThatBeehive() {
         //GIVEN
-        String dateTimeNow = ZonedDateTime.now().toString();
-        List<Beehive> beehives = List.of(new Beehive("1", dateTimeNow, "First Beehive", "left", "Colony"));
+        List<Beehive> beehives = List.of(testBeehive);
         when(beehiveRepo.findAll()).thenReturn(beehives);
+        List<Beehive> expected = List.of(testBeehive);
         //WHEN
         List<Beehive> actual = beehiveService.getAllBeehives();
         //THEN
-        List<Beehive> expected = List.of(new Beehive("1", dateTimeNow, "First Beehive", "left", "Colony"));
-
         verify(beehiveRepo).findAll();
         assertEquals(expected, actual);
     }
@@ -38,25 +44,22 @@ class BeehiveServiceTest {
     @Test
     void getBeehiveById_whenCalledBeehiveId_thenReturnThisBeehive() throws BeehiveNotFoundException {
         //GIVEN
-        String id = "1";
-        DateTimeService dateTimeService = new DateTimeService();
-        Beehive expected = new Beehive("1", dateTimeService.dateTimeNow(), "My Beehive", "last spot", "Colony");
-        when(beehiveRepo.findById(id)).thenReturn(Optional.of(expected));
+        when(beehiveRepo.findById(beehiveId)).thenReturn(Optional.of(testBeehive));
+        Beehive expected = testBeehive;
         //WHEN
-        Beehive actual = beehiveService.getBeehiveById(id);
+        Beehive actual = beehiveService.getBeehiveById(beehiveId);
         //THEN
-        verify(beehiveRepo).findById(id);
+        verify(beehiveRepo).findById(beehiveId);
         assertEquals(expected, actual);
     }
 
     @Test
     void getBeehiveById_whenCalledWithInvalidId_thenThrowBeehiveNotFoundException() throws BeehiveNotFoundException {
         //GIVEN
-        String id = "1";
         //WHEN
         //THEN
         try {
-            beehiveService.getBeehiveById(id);
+            beehiveService.getBeehiveById(beehiveId);
             fail();
         } catch (BeehiveNotFoundException e) {
             assertTrue(true);
@@ -77,35 +80,32 @@ class BeehiveServiceTest {
     @Test
     void saveBeehive_whenSaveNewBeehive_thenReturnSavedBeehive() {
         //GIVEN
-        BeehiveDTO beehiveDTO = new BeehiveDTO("Second Beehive", "under the tree", "Nucleus");
-        Beehive beehiveToSave = new Beehive("2", "15.01.2024 11:00", "Second Beehive", "under the tree", "Nucleus");
-
-        when(beehiveRepo.save(beehiveToSave)).thenReturn(beehiveToSave);
-        when(idService.randomID()).thenReturn("2");
-        when(dateTimeService.dateTimeNow()).thenReturn("15.01.2024 11:00");
+        when(idService.randomID()).thenReturn("1");
+        when(dateTimeService.dateTimeNow()).thenReturn("10.01.24, 12:00");
+        Beehive expected = new Beehive("1", "10.01.24, 12:00", testBeehive.name(), testBeehive.location(), testBeehive.type());
         //WHEN
-        Beehive actual = beehiveService.saveBeehive(beehiveDTO);
+        Beehive actual = beehiveService.saveBeehive(beehiveTestDto);
         //THEN
-        Beehive expected = new Beehive("2", "15.01.2024 11:00", "Second Beehive", "under the tree", "Nucleus");
-        verify(beehiveRepo).save(beehiveToSave);
+        verify(beehiveRepo).save(expected);
         assertEquals(expected, actual);
     }
 
     @Test
-    void deleteBeehive_whenDeleteBeehiveWithId_thenDeleteBeehiveById() {
+    void deleteBeehive_whenDeleteBeehiveWithId_thenDeleteBeehiveById() throws BeehiveNotFoundException {
         //GIVEN
-        String beehiveIdToDelete = "123";
+        when(beehiveRepo.findById(beehiveId)).thenReturn(Optional.of(testBeehive));
+        Beehive expected = testBeehive;
         //WHEN
-        beehiveService.deleteBeehive(beehiveIdToDelete);
+        Beehive actual = beehiveService.deleteBeehive(beehiveId);
         //THEN
-        verify(beehiveRepo, times(1)).deleteById(beehiveIdToDelete);
+        assertEquals(expected, actual);
     }
 
     @Test
     void deleteBeehive_whenDeleteWithNonExistingId_thenReturnNull() {
         //GIVEN
-        String nonExistingId = "non-existing-id";
+        when(beehiveRepo.findById("Beehive not found")).thenReturn(Optional.empty());
         //WHEN & THEN
-        assertDoesNotThrow(() -> beehiveService.deleteBeehive(nonExistingId));
+        assertThrows(BeehiveNotFoundException.class, () -> beehiveService.deleteBeehive("Beehive not found"));
     }
 }
