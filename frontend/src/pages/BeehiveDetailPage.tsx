@@ -1,5 +1,4 @@
 import {Beehive} from "../types/Beehive.ts";
-import Header from "../components/Header.tsx";
 import BeehiveDetail from "../components/BeehiveDetail.tsx";
 
 type BeehiveDetailPageProps = {
@@ -11,9 +10,9 @@ export default function BeehiveDetailPage(props: Readonly<BeehiveDetailPageProps
 
     return (
         <div className="page-container">
-            <Header/>
             <div className="wrapper">
                 <div className="title-container">
+                    <div className="divider"></div>
                     <h2>Dein Bienenvolk</h2>
                     <div className="divider"></div>
                 </div>

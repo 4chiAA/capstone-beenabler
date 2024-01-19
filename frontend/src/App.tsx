@@ -6,6 +6,7 @@ import axios from "axios";
 import {Route, Routes} from "react-router-dom";
 import BeehiveCreatePage from "./pages/BeehiveCreatePage.tsx";
 import BeehiveDetailPage from "./pages/BeehiveDetailPage.tsx";
+import Header from "./components/Header.tsx";
 
 export default function App() {
 
@@ -30,10 +31,13 @@ export default function App() {
 
 
   return (
-        <Routes>
-          <Route path={"/home"} element={<HomePage beehivesPreview={beehivesPreview}/>}/>
-          <Route path={"/beehive/:id"} element={<BeehiveDetailPage beehive={beehive} fetchBeehiveById={fetchBeehiveById}/>}/>
-          <Route path={"/create"} element={<BeehiveCreatePage/>}/>
-        </Routes>
+      <div>
+          <Header/>
+          <Routes>
+              <Route path={"/home"} element={<HomePage beehivesPreview={beehivesPreview}/>}/>
+              <Route path={"/beehive/:id"} element={<BeehiveDetailPage beehive={beehive} fetchBeehiveById={fetchBeehiveById}/>}/>
+              <Route path={"/create"} element={<BeehiveCreatePage/>}/>
+          </Routes>
+      </div>
   )
 }

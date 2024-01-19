@@ -15,7 +15,6 @@ export default function Header() {
                 </div>
                 <div className="login"></div>
             </div>
-            <div className="divider"></div>
         </header>
     );
 }
