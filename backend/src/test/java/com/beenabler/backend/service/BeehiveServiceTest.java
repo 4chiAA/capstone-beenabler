@@ -90,4 +90,22 @@ class BeehiveServiceTest {
         verify(beehiveRepo).save(beehiveToSave);
         assertEquals(expected, actual);
     }
+
+    @Test
+    void deleteBeehive_whenDeleteBeehiveWithId_thenDeleteBeehiveById() {
+        //GIVEN
+        String beehiveIdToDelete = "123";
+        //WHEN
+        beehiveService.deleteBeehive(beehiveIdToDelete);
+        //THEN
+        verify(beehiveRepo, times(1)).deleteById(beehiveIdToDelete);
+    }
+
+    @Test
+    void deleteBeehive_whenDeleteWithNonExistingId_thenReturnNull() {
+        //GIVEN
+        String nonExistingId = "non-existing-id";
+        //WHEN & THEN
+        assertDoesNotThrow(() -> beehiveService.deleteBeehive(nonExistingId));
+    }
 }
