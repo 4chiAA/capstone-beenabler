@@ -8,7 +8,9 @@ export default function FooterHome() {
             <div className="footer-container">
                 <div className="left"></div>
                 <div className="mid"></div>
-                <BeehiveCreateButton/>
+                <div className="create-button-home">
+                    <BeehiveCreateButton/>
+                </div>
             </div>
         </footer>
     );

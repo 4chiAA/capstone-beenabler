@@ -20,7 +20,7 @@ export default function HomePage(props: Readonly<HomeProps>){
                 </div>
                 <BeehivesPreview beehives={props.beehivesPreview}/>
                 <div className="create-button-home">
-                   <BeehiveCreateButton/>
+                    <BeehiveCreateButton/>
                 </div>
             </div>
             <FooterHome/>

@@ -4,7 +4,7 @@ export default function BeehiveCreateButton() {
 
     return (
         <Link to="/create">
-            <button className="create-button">+</button>
+            <img src="src/assets/createBeehiveButton.svg" alt="Logo"/>
         </Link>
     )
 }
