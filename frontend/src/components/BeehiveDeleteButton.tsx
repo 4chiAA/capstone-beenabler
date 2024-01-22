@@ -28,12 +28,12 @@ export default function BeehiveDeleteButton(props: Readonly<BeehiveDeleteButtonP
 
     return (
         <div>
-            <div onClick={handleConfirmation} role="button" tabIndex={0}>
-                <img
-                    src="/src/assets/deleteBeehiveButton.svg"
-                    alt="Löschen"
+            <input
+                type="image"
+                src="/src/assets/deleteBeehiveButton.svg"
+                alt="Löschen"
+                onClick={handleConfirmation}
                 />
-            </div>
 
             <BeehiveDeleteConfirmation
                 showConfirmation={showConfirmation}
