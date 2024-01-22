@@ -34,7 +34,7 @@ export default function App() {
       <div>
           <Header/>
           <Routes>
-              <Route path={"/home"} element={<HomePage beehivesPreview={beehivesPreview}/>}/>
+              <Route path={""} element={<HomePage beehivesPreview={beehivesPreview}/>}/>
               <Route path={"/beehive/:id"} element={<BeehiveDetailPage beehive={beehive} fetchBeehiveById={fetchBeehiveById}/>}/>
               <Route path={"/create"} element={<BeehiveCreatePage/>}/>
           </Routes>
