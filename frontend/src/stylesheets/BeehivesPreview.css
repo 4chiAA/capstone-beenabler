@@ -19,6 +19,13 @@
     max-height: 80px;
 }
 
+.beehives-preview .buttons {
+    position: relative;
+    z-index: 10;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
 .beehives-preview .description {
     color: #214A73;
     padding-left: 15px;

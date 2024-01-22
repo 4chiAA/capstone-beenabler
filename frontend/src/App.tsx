@@ -14,7 +14,7 @@ export default function App() {
   const [beehive, setBeehive] = useState<Beehive | undefined | null>(undefined)
 
   useEffect(() => {
-    fetchAllBeehives()
+    fetchAllBeehives();
   }, []);
 
   function fetchAllBeehives() {

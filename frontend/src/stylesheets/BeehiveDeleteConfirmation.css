@@ -12,7 +12,7 @@
 }
 
 .delete-confirmation {
-    background: rgba(255, 201, 96, 1);
+    background: #FFC960;
     display: flex;
     flex-direction: column;
     padding: 25px;

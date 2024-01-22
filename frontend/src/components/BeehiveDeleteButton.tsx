@@ -15,7 +15,6 @@ export default function BeehiveDeleteButton(props: BeehiveDeleteButtonProps) {
         try {
             await axios.delete("/api/beehives/" + props.beehive?.id);
             setShowConfirmation(false);
-            window.location.href = "/";
         } catch (error) {
             alert("Fehler beim löschen");
             setShowConfirmation(false);

@@ -25,6 +25,10 @@
     padding-bottom: 10px;
 }
 
-.beehive .dateTime{
+.beehive .dateTime {
     font-size: 12px;
+}
+
+.beehive-buttons {
+    display: flex;
 }

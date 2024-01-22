@@ -32,8 +32,11 @@ export default function BeehiveDetail(props: Readonly<BeehiveDetailProps>) {
                     <h3>{props.beehive.name}</h3>
                     <p>{props.beehive.type}</p>
                     <p className="dateTime">Update: {props.beehive.dateTime}</p>
-                    <BeehiveDeleteButton beehive={props.beehive}/>
                 </article>
+            <div className="beehive-buttons">
+                <BeehiveDeleteButton beehive={props.beehive}/>
+            </div>
+
         </div>
     )
 }
