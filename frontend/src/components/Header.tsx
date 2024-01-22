@@ -6,7 +6,7 @@ export default function Header() {
         <header>
             <div className="header-container">
                 <div className="logo">
-                    <Link to={""}>
+                    <Link to={"/"}>
                         <img src="src/assets/logo-beenabler.png" alt="Logo"/>
                     </Link>
                 </div>

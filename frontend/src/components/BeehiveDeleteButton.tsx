@@ -7,7 +7,7 @@ export type BeehiveDeleteButtonProps = {
     beehive: Beehive | undefined | null
 }
 
-export default function BeehiveDeleteButton(props: BeehiveDeleteButtonProps) {
+export default function BeehiveDeleteButton(props: Readonly<BeehiveDeleteButtonProps>) {
 
     const [showConfirmation, setShowConfirmation] = useState(false);
 
@@ -21,12 +21,16 @@ export default function BeehiveDeleteButton(props: BeehiveDeleteButtonProps) {
         }
     };
 
+    function handleConfirmation () {
+        setShowConfirmation(true);
+    }
+
     return (
         <div>
             <img
                 src="src/assets/deleteBeehiveButton.svg"
                 alt="Löschen"
-                onClick={() => setShowConfirmation(true)}
+                onClick={handleConfirmation}
             />
             <BeehiveDeleteConfirmation
                 showConfirmation={showConfirmation}

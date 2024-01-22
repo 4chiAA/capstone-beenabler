@@ -7,7 +7,7 @@ export type BeehiveDeleteConfirmationProps = {
     onDelete: () => Promise<void>;
 }
 
-export default function BeehiveDeleteConfirmation(props: BeehiveDeleteConfirmationProps) {
+export default function BeehiveDeleteConfirmation(props: Readonly<BeehiveDeleteConfirmationProps>) {
 
     const handleConfirm = async () => {
         await props.onDelete();

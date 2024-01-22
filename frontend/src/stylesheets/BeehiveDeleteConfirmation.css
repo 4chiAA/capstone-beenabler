@@ -9,6 +9,7 @@
     justify-content: center;
     align-items: center;
     z-index: 1000;
+    cursor: pointer;
 }
 
 .delete-confirmation {
@@ -21,8 +22,4 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 70%;
     text-align: center;
-}
-
-.overlay {
-    cursor: pointer;
 }
