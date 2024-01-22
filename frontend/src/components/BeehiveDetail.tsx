@@ -26,7 +26,7 @@ export default function BeehiveDetail(props: Readonly<BeehiveDetailProps>) {
     return (
         <div className="beehive-container">
             <div className="logo">
-                <img src="src/assets/beehive_preview.png" alt="Logo"/>
+                <img src="/src/assets/beehive_preview.png" alt="Logo"/>
             </div>
                 <article className="beehive">
                     <h3>{props.beehive.name}</h3>

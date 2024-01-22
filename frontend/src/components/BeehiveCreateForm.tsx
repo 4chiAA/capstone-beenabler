@@ -30,7 +30,7 @@ export default function BeehiveCreateForm() {
 
         axios.post<Beehive>("/api/beehives", newBeehive)
             .then(response => {
-                alert("Neues Bienenvolk \"" + response.data.name + "\" wurde erstellt");
+                console.log("Neues Bienenvolk \"" + response.data.name + "\" wurde erstellt");
                 window.location.href = "/";
             })
             .catch((error) => {

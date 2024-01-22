@@ -19,7 +19,7 @@ export default function BeehivesPreview(props: Readonly<BeehivePreviewProps>) {
                             <article className="beehives-preview" key={beehive.id}>
                                 <Link to={"/beehive/" + beehive.id}>
                                     <div className="logo">
-                                       <img src="src/assets/beehive_preview.png" alt="Logo"/>
+                                       <img src="/src/assets/beehive_preview.png" alt="Logo"/>
                                     </div>
                                 </Link>
                                 <Link to={"/beehive/" + beehive.id} style={{textDecoration: "none", color: "inherit"}}>

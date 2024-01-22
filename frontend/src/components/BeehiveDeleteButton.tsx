@@ -15,6 +15,7 @@ export default function BeehiveDeleteButton(props: Readonly<BeehiveDeleteButtonP
         try {
             await axios.delete("/api/beehives/" + props.beehive?.id);
             setShowConfirmation(false);
+            window.location.href = "/";
         } catch (error) {
             alert("Fehler beim löschen");
             setShowConfirmation(false);
@@ -27,11 +28,13 @@ export default function BeehiveDeleteButton(props: Readonly<BeehiveDeleteButtonP
 
     return (
         <div>
-            <img
-                src="src/assets/deleteBeehiveButton.svg"
-                alt="Löschen"
-                onClick={handleConfirmation}
-            />
+            <div onClick={handleConfirmation} role="button" tabIndex={0}>
+                <img
+                    src="/src/assets/deleteBeehiveButton.svg"
+                    alt="Löschen"
+                />
+            </div>
+
             <BeehiveDeleteConfirmation
                 showConfirmation={showConfirmation}
                 setShowConfirmation={setShowConfirmation}
