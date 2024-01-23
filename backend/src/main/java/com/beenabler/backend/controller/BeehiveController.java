@@ -5,6 +5,7 @@ import com.beenabler.backend.model.Beehive;
 import com.beenabler.backend.model.BeehiveDTO;
 import com.beenabler.backend.service.BeehiveService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,6 +30,16 @@ public class BeehiveController {
     @PostMapping
     public Beehive saveBeehive (@RequestBody BeehiveDTO beehive){
         return beehiveService.saveBeehive(beehive);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Beehive> updateBeehive(@PathVariable String id, @RequestBody Beehive updatedBeehive) {
+        try {
+            Beehive updated = beehiveService.updateBeehive(id, updatedBeehive);
+            return ResponseEntity.ok(updated);
+        } catch (BeehiveNotFoundException ex) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @DeleteMapping("/{id}")
