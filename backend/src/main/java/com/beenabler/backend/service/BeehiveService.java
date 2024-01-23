@@ -20,8 +20,6 @@ public class BeehiveService {
 
     private static final String BEEHIVE_NOT_FOUND_MESSAGE = "Beehive not found";
 
-
-
         public List<Beehive> getAllBeehives() {
         return beehiveRepo.findAll();
     }
