@@ -15,23 +15,27 @@
     color: inherit;
 }
 
-.beehives-preview .logo img {
-    max-height: 80px;
+.beehives-preview .left-part {
 }
 
 .beehives-preview .buttons {
-    position: relative;
-    z-index: 10;
+    display: flex;
+    justify-content: space-evenly;
     cursor: pointer;
-    pointer-events: auto;
 }
 
-.beehives-preview .description {
+.beehives-preview .left-part .logo img {
+    max-height: 80px;
+}
+
+.beehives-preview .right-part .description {
     color: #214A73;
     padding-left: 15px;
     padding-right: 15px;
 }
 
-.beehives-preview .description .dateTime{
+.beehives-preview .right-part .description .dateTime {
     font-size: 12px;
 }
+
+

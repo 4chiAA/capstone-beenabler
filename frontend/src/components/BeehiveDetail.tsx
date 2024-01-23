@@ -6,7 +6,7 @@ import BeehiveDeleteButton from "./BeehiveDeleteButton.tsx";
 
 type BeehiveDetailProps = {
     beehive: Beehive | undefined | null
-    fetchBeehiveById: (id: string) => void
+    getBeehiveById: (id: string) => void
 }
 
 export default function BeehiveDetail(props: Readonly<BeehiveDetailProps>) {
@@ -14,7 +14,7 @@ export default function BeehiveDetail(props: Readonly<BeehiveDetailProps>) {
     const {id} = useParams();
 
     useEffect(() => {
-        props.fetchBeehiveById(String(id))
+        props.getBeehiveById(String(id))
     }, [id, props]);
 
     if (props.beehive === undefined) {
