@@ -9,7 +9,7 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
-    background-color: hsl(35, 100%, 70%);
+    background-color: #FFC960;
     border: 1px solid;
     border-radius: 10px;
     color: inherit;
@@ -19,8 +19,15 @@
     max-height: 80px;
 }
 
+.beehives-preview .buttons {
+    position: relative;
+    z-index: 10;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
 .beehives-preview .description {
-    color: rgb(0, 100, 150);
+    color: #214A73;
     padding-left: 15px;
     padding-right: 15px;
 }

@@ -6,8 +6,8 @@ export default function Header() {
         <header>
             <div className="header-container">
                 <div className="logo">
-                    <Link to={"/home"}>
-                        <img src="src/assets/logo-beenabler.png" alt="Logo"/>
+                    <Link to={"/"}>
+                        <img src="/src/assets/logo-beenabler.png" alt="Logo"/>
                     </Link>
                 </div>
                 <div className="title">
@@ -15,7 +15,6 @@ export default function Header() {
                 </div>
                 <div className="login"></div>
             </div>
-            <div className="divider"></div>
         </header>
     );
 }

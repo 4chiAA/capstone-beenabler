@@ -1,5 +1,6 @@
 package com.beenabler.backend.controller;
 
+import com.beenabler.backend.exception.BeehiveNotFoundException;
 import com.beenabler.backend.model.Beehive;
 import com.beenabler.backend.model.BeehiveDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,10 +17,8 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.List;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -46,13 +45,13 @@ class BeehiveControllerTest {
     @DirtiesContext
     void getAllBeehives_whenBeehiveWithId1IsGiven_thenReturnListWithBeehive1() throws Exception {
         //GIVEN
-        BeehiveDTO firstBeehiveDTO = new BeehiveDTO("First Beehive", "left", "COLONY");
+        BeehiveDTO firstBeehiveDTO = new BeehiveDTO("First Beehive", "left", "Colony");
         String firstBeehiveDTOJson = objectMapper.writeValueAsString(firstBeehiveDTO);
 
         MvcResult result = mockMvc.perform(post(BASE_URL)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(firstBeehiveDTOJson))
-                        .andReturn();
+                .andReturn();
 
         Beehive beehiveInDB = objectMapper.readValue(result.getResponse().getContentAsString(), Beehive.class);
         String beehivesAsJson = objectMapper.writeValueAsString(List.of(beehiveInDB));
@@ -67,7 +66,7 @@ class BeehiveControllerTest {
     @Test
     void getBeehiveById_whenBeehiveWithIdIsGiven_thenReturnThisBeehive() throws Exception {
         //GIVEN
-        BeehiveDTO secondBeehiveDTO = new BeehiveDTO("Second Beehive", "right", "COLONY");
+        BeehiveDTO secondBeehiveDTO = new BeehiveDTO("Second Beehive", "right", "Colony");
         String secondBeehiveDTOJson = objectMapper.writeValueAsString(secondBeehiveDTO);
 
         String actual = mockMvc.perform(post(BASE_URL)
@@ -86,14 +85,14 @@ class BeehiveControllerTest {
                 //THEN
                 .andExpect(status().isOk())
                 .andExpect(content().json("""
-                {
-                    "id": "<ID>",
-                    "dateTime": "<DATETIME>",
-                    "name": "Second Beehive",
-                    "location": "right",
-                    "type": "COLONY"
-                }
-                """.replaceFirst("<ID>", id)
+                        {
+                            "id": "<ID>",
+                            "dateTime": "<DATETIME>",
+                            "name": "Second Beehive",
+                            "location": "right",
+                            "type": "Colony"
+                        }
+                        """.replaceFirst("<ID>", id)
                         .replaceFirst("<DATETIME>", dateTime)));
     }
 
@@ -101,16 +100,36 @@ class BeehiveControllerTest {
     @Test
     void saveBeehive_whenABeehiveIsSaved_thenReturnSavedBeehive() throws Exception {
         //GIVEN
-        BeehiveDTO beehiveDTO = new BeehiveDTO("crazy bees", "up hill", "NUCLEUS");
-        System.out.println(beehiveDTO);
+        BeehiveDTO beehiveDTO = new BeehiveDTO("crazy bees", "up hill", "Nucleus");
         //WHEN
         mockMvc.perform(post(BASE_URL)
-                //THEN
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(beehiveDTO)))
+                        //THEN
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(beehiveDTO)))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("crazy bees"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.location").value("up hill"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.type").value("NUCLEUS"));
+                .andExpect(jsonPath("$.name").value("crazy bees"))
+                .andExpect(jsonPath("$.location").value("up hill"))
+                .andExpect(jsonPath("$.type").value("Nucleus"));
+    }
+
+    @DirtiesContext
+    @Test
+    void deleteBeehive_whenDeleteExistingBeehive_thenDeleteBeehiveById() throws Exception {
+        //GIVEN
+        BeehiveDTO existingBeehiveDTO = new BeehiveDTO("Beehive", "here", "Colony");
+
+        String existing = mockMvc.perform(post(BASE_URL)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(existingBeehiveDTO)))
+                .andExpect(status().isOk())
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+
+        Beehive existingBeehive = objectMapper.readValue(existing, Beehive.class);
+        String existingId = existingBeehive.id();
+        //WHEN & THEN
+        mockMvc.perform(delete("/api/beehives/{id}", existingId))
+                .andExpect(MockMvcResultMatchers.status().isOk());
     }
 }

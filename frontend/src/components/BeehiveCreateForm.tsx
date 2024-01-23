@@ -22,7 +22,7 @@ export default function BeehiveCreateForm() {
         setInputType(event.target.value)
     }
 
-    function createBeehive(newBeehive: Beehive) {
+    function postBeehive(newBeehive: Beehive) {
         if (!newBeehive.name || !newBeehive.location || !newBeehive.type) {
             alert("Bitte fülle alle Felder aus");
             return;
@@ -30,8 +30,8 @@ export default function BeehiveCreateForm() {
 
         axios.post<Beehive>("/api/beehives", newBeehive)
             .then(response => {
-                alert("Neues Bienenvolk \"" + response.data.name + "\" wurde erstellt");
-                window.location.href = "/home";
+                console.log("Neues Bienenvolk \"" + response.data.name + "\" wurde erstellt");
+                window.location.href = "/";
             })
             .catch((error) => {
                 if (error.response) {
@@ -52,11 +52,11 @@ export default function BeehiveCreateForm() {
                 location: inputLocation,
                 type: inputType
             }
-          createBeehive(newBeehive)
+          postBeehive(newBeehive)
     }
 
     function cancelCreation() {
-        window.location.href = "/home";
+        window.location.href = "/";
     }
 
     return (
