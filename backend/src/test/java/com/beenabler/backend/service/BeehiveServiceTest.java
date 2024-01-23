@@ -100,11 +100,11 @@ class BeehiveServiceTest {
     }
 
     @Test
-    void deleteBeehive_whenDeleteWithNonExistingId_thenReturnNull() {
+    void deleteBeehive_whenDeleteWithNonExistingId_thenThrowException() {
         //GIVEN
-        when(beehiveRepo.findById("Beehive not found")).thenReturn(Optional.empty());
+        when(beehiveRepo.findById("randomId")).thenReturn(Optional.empty());
         //WHEN & THEN
-        assertThrows(BeehiveNotFoundException.class, () -> beehiveService.deleteBeehive("Beehive not found"));
+        assertThrows(BeehiveNotFoundException.class, () -> beehiveService.deleteBeehive("randomId"));
     }
 
     @Test
@@ -127,5 +127,13 @@ class BeehiveServiceTest {
         assertEquals("New Beehive", actual.name());
         assertEquals("next spot", actual.location());
         assertEquals("Colony", actual.type());
+    }
+
+    @Test
+    void updateBeehive_whenUpdateWithNonExistingId_thenThrowException() {
+        //GIVEN
+        when(beehiveRepo.findById("randomId")).thenReturn(Optional.empty());
+        //WHEN & THEN
+        assertThrows(BeehiveNotFoundException.class, () -> beehiveService.updateBeehive("randomId", testBeehive));
     }
 }
