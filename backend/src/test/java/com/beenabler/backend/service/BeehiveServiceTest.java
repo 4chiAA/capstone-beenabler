@@ -66,7 +66,6 @@ class BeehiveServiceTest {
         }
     }
 
-
     @Test
     void getAllBeehives_whenCalledWithNoBeehives_thenReturnEmptyList() {
         //GIVEN
@@ -107,5 +106,27 @@ class BeehiveServiceTest {
         when(beehiveRepo.findById("Beehive not found")).thenReturn(Optional.empty());
         //WHEN & THEN
         assertThrows(BeehiveNotFoundException.class, () -> beehiveService.deleteBeehive("Beehive not found"));
+    }
+
+    @Test
+    void updateBeehive_whenUpdateExistingBeehive_thenReturnUpdatedBeehive() throws BeehiveNotFoundException {
+        //GIVEN
+        Beehive existingBeehive = testBeehive;
+        Beehive updatedBeehive = new Beehive(beehiveId, beehiveDateTime, "New Beehive", "next spot", "Colony");
+
+        when(beehiveRepo.findById(beehiveId)).thenReturn(Optional.of(existingBeehive));
+        when(dateTimeService.dateTimeNow()).thenReturn(beehiveDateTime);
+        //WHEN
+        Beehive actual = beehiveService.updateBeehive(beehiveId, updatedBeehive);
+        //THEN
+        verify(beehiveRepo).findById(beehiveId);
+        verify(beehiveRepo).save(actual);
+        verify(beehiveRepo).deleteById(beehiveId);
+
+        assertNotNull(actual);
+        assertEquals(beehiveDateTime, actual.dateTime());
+        assertEquals("New Beehive", actual.name());
+        assertEquals("next spot", actual.location());
+        assertEquals("Colony", actual.type());
     }
 }
