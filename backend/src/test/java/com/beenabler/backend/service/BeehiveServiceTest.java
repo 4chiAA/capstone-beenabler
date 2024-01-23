@@ -6,7 +6,6 @@ import com.beenabler.backend.model.BeehiveDTO;
 import com.beenabler.backend.repo.BeehiveRepo;
 import org.junit.jupiter.api.Test;
 
-import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,7 +53,7 @@ class BeehiveServiceTest {
     }
 
     @Test
-    void getBeehiveById_whenCalledWithInvalidId_thenThrowBeehiveNotFoundException() throws BeehiveNotFoundException {
+    void getBeehiveById_whenCalledWithInvalidId_thenThrowBeehiveNotFoundException() {
         //GIVEN
         //WHEN
         //THEN
