@@ -3,6 +3,7 @@ package com.beenabler.backend.controller;
 import com.beenabler.backend.exception.BeehiveNotFoundException;
 import com.beenabler.backend.model.Beehive;
 import com.beenabler.backend.model.BeehiveDTO;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,6 +111,48 @@ class BeehiveControllerTest {
                 .andExpect(jsonPath("$.name").value("crazy bees"))
                 .andExpect(jsonPath("$.location").value("up hill"))
                 .andExpect(jsonPath("$.type").value("Nucleus"));
+    }
+
+    @Test
+    void updateBeehive_whenValidIdAndUpdatedInputIsGiven_thenReturnUpdatedBeehive() throws Exception {
+        //GIVEN
+        BeehiveDTO beehiveDTO = new BeehiveDTO("First Beehive", "left", "Colony");
+        String beehiveDTOJson = objectMapper.writeValueAsString(beehiveDTO);
+
+        MvcResult result = mockMvc.perform(post(BASE_URL)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(beehiveDTOJson))
+                        .andReturn();
+
+        Beehive beehiveInDatabase = objectMapper.readValue(result.getResponse().getContentAsString(), Beehive.class);
+        String beehiveIdInDatabase = beehiveInDatabase.id();
+
+        Beehive updatedBeehive = new Beehive(beehiveIdInDatabase, beehiveInDatabase.dateTime(), "Updated First Beehive", "right", "Colony");
+
+        //WHEN
+        mockMvc.perform(MockMvcRequestBuilders.put(BASE_URL + "/" + beehiveIdInDatabase)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(updatedBeehive)))
+                //THEN
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(beehiveIdInDatabase))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value(updatedBeehive.name()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.location").value(updatedBeehive.location()))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.type").value(updatedBeehive.type()));
+    }
+
+    @Test
+    void updateBeehive_whenInvalidIdProvided_shouldReturnNotFound() throws Exception {
+        //GIVEN
+        String invalidId = "999";
+        Beehive updatedBeehive = new Beehive("1", "10.01.24, 12:00", "New Hive", "New Location", "Nucleus");
+
+        //WHEN
+        mockMvc.perform(MockMvcRequestBuilders.put(BASE_URL + "/" + invalidId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(updatedBeehive)))
+                //THEN
+                .andExpect(MockMvcResultMatchers.status().isNotFound());
     }
 
     @DirtiesContext

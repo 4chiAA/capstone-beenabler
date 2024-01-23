@@ -35,18 +35,6 @@ public class BeehiveService {
         return newBeehive;
     }
 
-    public Beehive deleteBeehive(String id) throws BeehiveNotFoundException {
-        Optional<Beehive> optionalBeehive = beehiveRepo.findById(id);
-
-        if (optionalBeehive.isPresent()) {
-            Beehive deletedBeehive = optionalBeehive.get();
-            beehiveRepo.deleteById(id);
-            return deletedBeehive;
-        } else {
-            throw new BeehiveNotFoundException(BEEHIVE_NOT_FOUND_MESSAGE);
-        }
-    }
-
     public Beehive updateBeehive(String beehiveId, Beehive updatedBeehive) throws BeehiveNotFoundException {
         Optional<Beehive> optionalBeehive = beehiveRepo.findById(beehiveId);
 
@@ -54,13 +42,25 @@ public class BeehiveService {
             Beehive existingBeehive = optionalBeehive.get();
 
             Beehive updated = existingBeehive.withDateTime(dateTimeService.dateTimeNow())
-                                                .withName(updatedBeehive.name())
-                                                .withLocation(updatedBeehive.location())
-                                                .withType(updatedBeehive.type());
+                    .withName(updatedBeehive.name())
+                    .withLocation(updatedBeehive.location())
+                    .withType(updatedBeehive.type());
 
-            beehiveRepo.save(updated);
             beehiveRepo.deleteById(beehiveId);
+            beehiveRepo.save(updated);
             return updated;
+        } else {
+            throw new BeehiveNotFoundException(BEEHIVE_NOT_FOUND_MESSAGE);
+        }
+    }
+
+    public Beehive deleteBeehive(String id) throws BeehiveNotFoundException {
+        Optional<Beehive> optionalBeehive = beehiveRepo.findById(id);
+
+        if (optionalBeehive.isPresent()) {
+            Beehive deletedBeehive = optionalBeehive.get();
+            beehiveRepo.deleteById(id);
+            return deletedBeehive;
         } else {
             throw new BeehiveNotFoundException(BEEHIVE_NOT_FOUND_MESSAGE);
         }
