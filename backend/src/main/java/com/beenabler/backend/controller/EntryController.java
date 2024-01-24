@@ -1,12 +1,12 @@
 package com.beenabler.backend.controller;
 
+import com.beenabler.backend.exception.BeehiveNotFoundException;
 import com.beenabler.backend.model.Entry;
+import com.beenabler.backend.model.EntryDTO;
 import com.beenabler.backend.service.EntryService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,8 +17,18 @@ public class EntryController {
 
     private final EntryService entryService;
 
-    @GetMapping("/{id}")
-    public List<Entry> getAllEntries(@PathVariable String id) {
-        return entryService.getAllEntries(id);
+    @GetMapping("/{beehiveId}")
+    public List<Entry> getAllEntries(@PathVariable String beehiveId) {
+        return entryService.getAllEntries(beehiveId);
+    }
+
+    @PostMapping("/{beehiveId}")
+    public ResponseEntity<Entry> addEntry(@PathVariable String beehiveId, @RequestBody EntryDTO newEntryDTO) {
+        try {
+            Entry newEntry = entryService.addEntry(beehiveId, newEntryDTO);
+            return ResponseEntity.ok(newEntry);
+        } catch (BeehiveNotFoundException ex) {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
