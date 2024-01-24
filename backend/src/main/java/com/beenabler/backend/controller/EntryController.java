@@ -19,13 +19,13 @@ public class EntryController {
 
     @GetMapping("/{beehiveId}")
     public List<Entry> getAllEntries(@PathVariable String beehiveId) {
-        return entryService.getAllEntries(beehiveId);
+        return entryService.getAllEntriesForBeehive(beehiveId);
     }
 
     @PostMapping("/{beehiveId}")
     public ResponseEntity<Entry> addEntry(@PathVariable String beehiveId, @RequestBody EntryDTO newEntryDTO) {
         try {
-            Entry newEntry = entryService.addEntry(beehiveId, newEntryDTO);
+            Entry newEntry = entryService.addEntryForBeehive(beehiveId, newEntryDTO);
             return ResponseEntity.ok(newEntry);
         } catch (BeehiveNotFoundException ex) {
             return ResponseEntity.notFound().build();

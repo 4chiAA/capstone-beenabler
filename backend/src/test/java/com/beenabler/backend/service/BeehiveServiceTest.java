@@ -41,6 +41,16 @@ class BeehiveServiceTest {
     }
 
     @Test
+    void getAllBeehives_whenCalledWithNoBeehives_thenReturnEmptyList() {
+        //GIVEN
+        List<Beehive> expected = List.of();
+        //WHEN
+        List<Beehive> actual = beehiveService.getAllBeehives();
+        //THEN
+        assertEquals(expected, actual);
+    }
+
+    @Test
     void getBeehiveById_whenCalledBeehiveId_thenReturnThisBeehive() throws BeehiveNotFoundException {
         //GIVEN
         when(beehiveRepo.findById(beehiveId)).thenReturn(Optional.of(testBeehive));
@@ -66,17 +76,7 @@ class BeehiveServiceTest {
     }
 
     @Test
-    void getAllBeehives_whenCalledWithNoBeehives_thenReturnEmptyList() {
-        //GIVEN
-        //WHEN
-        List<Beehive> actual = beehiveService.getAllBeehives();
-        //THEN
-        List<Beehive> expected = List.of();
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    void saveBeehive_whenSaveNewBeehive_thenReturnSavedBeehive() {
+    void addBeehive_whenAddNewBeehive_thenReturnAddedBeehive() {
         //GIVEN
         when(idService.randomID()).thenReturn("1");
         when(dateTimeService.dateTimeNow()).thenReturn("10.01.24, 12:00");

@@ -23,11 +23,11 @@ public class EntryService {
 
     private static final String BEEHIVE_NOT_FOUND_MESSAGE = "Beehive not found";
 
-    public List<Entry> getAllEntries(String beehiveId) {
+    public List<Entry> getAllEntriesForBeehive(String beehiveId) {
         return entryRepo.findAllByBeehiveId(beehiveId);
     }
 
-    public Entry addEntry(String beehiveId, EntryDTO entryDTO) throws BeehiveNotFoundException {
+    public Entry addEntryForBeehive(String beehiveId, EntryDTO entryDTO) throws BeehiveNotFoundException {
         Optional<Beehive> optionalBeehive = beehiveRepo.findById(beehiveId);
         if (optionalBeehive.isPresent()) {
             Entry newEntry = new Entry(idService.randomID(),
