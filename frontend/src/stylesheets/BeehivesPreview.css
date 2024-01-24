@@ -16,16 +16,20 @@
 }
 
 .beehives-preview .left-part {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.beehives-preview .left-part .logo img {
+    padding-top: 5px;
+    max-height: 60px;
 }
 
 .beehives-preview .buttons {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
     cursor: pointer;
-}
-
-.beehives-preview .left-part .logo img {
-    max-height: 80px;
 }
 
 .beehives-preview .right-part .description {

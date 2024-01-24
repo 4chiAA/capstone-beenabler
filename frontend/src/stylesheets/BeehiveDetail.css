@@ -6,9 +6,8 @@
     padding: 10px 20px;
 }
 
-.beehive-container .logo {
-    padding-top: 10px;
-    padding-bottom: 10px;
+.beehive-container .logo img{
+    max-height: 80px;
 }
 
 .beehive-container .beehive {
@@ -30,4 +29,7 @@
 
 .beehive-container .beehive-buttons {
     display: flex;
+    justify-content: space-between;
+    column-gap: 10px;
+    cursor: pointer;
 }

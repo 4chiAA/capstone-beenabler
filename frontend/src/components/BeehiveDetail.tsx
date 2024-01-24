@@ -3,6 +3,7 @@ import {Beehive} from "../types/Beehive.ts";
 import {useParams} from "react-router-dom";
 import {useEffect} from "react";
 import BeehiveDeleteButton from "./BeehiveDeleteButton.tsx";
+import BeehiveUpdateButton from "./BeehiveUpdateButton.tsx";
 
 type BeehiveDetailProps = {
     beehive: Beehive | undefined | null
@@ -31,10 +32,12 @@ export default function BeehiveDetail(props: Readonly<BeehiveDetailProps>) {
                 <article className="beehive">
                     <h3>{props.beehive.name}</h3>
                     <p>{props.beehive.type}</p>
+                    <p>Standort: {props.beehive.location}</p>
                     <p className="dateTime">Update: {props.beehive.dateTime}</p>
                 </article>
             <div className="beehive-buttons">
                 <BeehiveDeleteButton beehive={props.beehive}/>
+                <BeehiveUpdateButton beehive={props.beehive}/>
             </div>
 
         </div>

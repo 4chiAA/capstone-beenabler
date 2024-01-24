@@ -10,7 +10,7 @@ export default function BeehiveUpdateButton(props: Readonly<BeehiveUpdateButtonP
     return (
         <div>
             <Link to={"/beehive/update/" + props.beehive?.id}>
-                <img src="/src/assets/createBeehiveButton.svg" alt="Erstellen"/>
+                <img src="/src/assets/updateBeehiveButton.svg" alt="Erstellen"/>
             </Link>
         </div>
     )
