@@ -82,7 +82,7 @@ class BeehiveServiceTest {
         when(dateTimeService.dateTimeNow()).thenReturn("10.01.24, 12:00");
         Beehive expected = new Beehive("1", "10.01.24, 12:00", testBeehive.name(), testBeehive.location(), testBeehive.type());
         //WHEN
-        Beehive actual = beehiveService.saveBeehive(beehiveTestDto);
+        Beehive actual = beehiveService.addBeehive(beehiveTestDto);
         //THEN
         verify(beehiveRepo).save(expected);
         assertEquals(expected, actual);

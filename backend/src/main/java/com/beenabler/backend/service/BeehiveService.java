@@ -20,7 +20,7 @@ public class BeehiveService {
 
     private static final String BEEHIVE_NOT_FOUND_MESSAGE = "Beehive not found";
 
-        public List<Beehive> getAllBeehives() {
+    public List<Beehive> getAllBeehives() {
         return beehiveRepo.findAll();
     }
 
@@ -29,7 +29,7 @@ public class BeehiveService {
                 .orElseThrow(() -> new BeehiveNotFoundException(BEEHIVE_NOT_FOUND_MESSAGE));
     }
 
-    public Beehive saveBeehive(BeehiveDTO beehiveDTO) {
+    public Beehive addBeehive(BeehiveDTO beehiveDTO) {
         Beehive newBeehive = new Beehive(idService.randomID(), dateTimeService.dateTimeNow(), beehiveDTO.name(), beehiveDTO.location(), beehiveDTO.type());
         beehiveRepo.save(newBeehive);
         return newBeehive;
