@@ -18,12 +18,12 @@ public class EntryController {
     private final EntryService entryService;
 
     @GetMapping("/{beehiveId}")
-    public List<Entry> getAllEntries(@PathVariable String beehiveId) {
+    public List<Entry> getAllEntriesForBeehive(@PathVariable String beehiveId) {
         return entryService.getAllEntriesForBeehive(beehiveId);
     }
 
     @PostMapping("/{beehiveId}")
-    public ResponseEntity<Entry> addEntry(@PathVariable String beehiveId, @RequestBody EntryDTO newEntryDTO) {
+    public ResponseEntity<Entry> addEntryForBeehive(@PathVariable String beehiveId, @RequestBody EntryDTO newEntryDTO) {
         try {
             Entry newEntry = entryService.addEntryForBeehive(beehiveId, newEntryDTO);
             return ResponseEntity.ok(newEntry);
