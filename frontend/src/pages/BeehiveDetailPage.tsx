@@ -3,7 +3,7 @@ import BeehiveDetail from "../components/BeehiveDetail.tsx";
 
 type BeehiveDetailPageProps = {
     beehive: Beehive | undefined | null
-    fetchBeehiveById: (id: string) => void
+    getBeehiveById: (id: string) => void
 }
 
 export default function BeehiveDetailPage(props: Readonly<BeehiveDetailPageProps>) {
@@ -16,7 +16,7 @@ export default function BeehiveDetailPage(props: Readonly<BeehiveDetailPageProps
                     <h2>Dein Bienenvolk</h2>
                     <div className="divider"></div>
                 </div>
-                <BeehiveDetail beehive={props.beehive} fetchBeehiveById={props.fetchBeehiveById}/>
+                <BeehiveDetail beehive={props.beehive} getBeehiveById={props.getBeehiveById}/>
             </div>
         </div>
     )

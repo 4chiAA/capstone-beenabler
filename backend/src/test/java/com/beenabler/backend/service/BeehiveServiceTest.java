@@ -6,7 +6,6 @@ import com.beenabler.backend.model.BeehiveDTO;
 import com.beenabler.backend.repo.BeehiveRepo;
 import org.junit.jupiter.api.Test;
 
-import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,7 +53,7 @@ class BeehiveServiceTest {
     }
 
     @Test
-    void getBeehiveById_whenCalledWithInvalidId_thenThrowBeehiveNotFoundException() throws BeehiveNotFoundException {
+    void getBeehiveById_whenCalledWithInvalidId_thenThrowBeehiveNotFoundException() {
         //GIVEN
         //WHEN
         //THEN
@@ -65,7 +64,6 @@ class BeehiveServiceTest {
             assertTrue(true);
         }
     }
-
 
     @Test
     void getAllBeehives_whenCalledWithNoBeehives_thenReturnEmptyList() {
@@ -91,6 +89,36 @@ class BeehiveServiceTest {
     }
 
     @Test
+    void updateBeehive_whenUpdateExistingBeehive_thenReturnUpdatedBeehive() throws BeehiveNotFoundException {
+        //GIVEN
+        Beehive existingBeehive = testBeehive;
+        Beehive updatedBeehive = new Beehive(beehiveId, beehiveDateTime, "New Beehive", "next spot", "Colony");
+
+        when(beehiveRepo.findById(beehiveId)).thenReturn(Optional.of(existingBeehive));
+        when(dateTimeService.dateTimeNow()).thenReturn(beehiveDateTime);
+        //WHEN
+        Beehive actual = beehiveService.updateBeehive(beehiveId, updatedBeehive);
+        //THEN
+        verify(beehiveRepo).findById(beehiveId);
+        verify(beehiveRepo).save(actual);
+        verify(beehiveRepo).deleteById(beehiveId);
+
+        assertNotNull(actual);
+        assertEquals(beehiveDateTime, actual.dateTime());
+        assertEquals("New Beehive", actual.name());
+        assertEquals("next spot", actual.location());
+        assertEquals("Colony", actual.type());
+    }
+
+    @Test
+    void updateBeehive_whenUpdateWithNonExistingId_thenThrowException() {
+        //GIVEN
+        when(beehiveRepo.findById("randomId")).thenReturn(Optional.empty());
+        //WHEN & THEN
+        assertThrows(BeehiveNotFoundException.class, () -> beehiveService.updateBeehive("randomId", testBeehive));
+    }
+
+    @Test
     void deleteBeehive_whenDeleteBeehiveWithId_thenDeleteBeehiveById() throws BeehiveNotFoundException {
         //GIVEN
         when(beehiveRepo.findById(beehiveId)).thenReturn(Optional.of(testBeehive));
@@ -102,10 +130,10 @@ class BeehiveServiceTest {
     }
 
     @Test
-    void deleteBeehive_whenDeleteWithNonExistingId_thenReturnNull() {
+    void deleteBeehive_whenDeleteWithNonExistingId_thenThrowException() {
         //GIVEN
-        when(beehiveRepo.findById("Beehive not found")).thenReturn(Optional.empty());
+        when(beehiveRepo.findById("randomId")).thenReturn(Optional.empty());
         //WHEN & THEN
-        assertThrows(BeehiveNotFoundException.class, () -> beehiveService.deleteBeehive("Beehive not found"));
+        assertThrows(BeehiveNotFoundException.class, () -> beehiveService.deleteBeehive("randomId"));
     }
 }

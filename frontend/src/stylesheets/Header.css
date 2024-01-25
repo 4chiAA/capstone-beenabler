@@ -10,10 +10,10 @@ header {
     justify-content: space-between;
 }
 
-.logo img {
+.header-container .logo img {
     max-height: 50px;
 }
 
-.login {
+.header-container .login {
     width: 50px;
 }

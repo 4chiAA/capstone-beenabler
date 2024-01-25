@@ -15,23 +15,31 @@
     color: inherit;
 }
 
-.beehives-preview .logo img {
-    max-height: 80px;
+.beehives-preview .left-part {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.beehives-preview .left-part .logo img {
+    padding-top: 5px;
+    max-height: 60px;
 }
 
 .beehives-preview .buttons {
-    position: relative;
-    z-index: 10;
+    display: flex;
+    justify-content: space-around;
     cursor: pointer;
-    pointer-events: auto;
 }
 
-.beehives-preview .description {
+.beehives-preview .right-part .description {
     color: #214A73;
     padding-left: 15px;
     padding-right: 15px;
 }
 
-.beehives-preview .description .dateTime{
+.beehives-preview .right-part .description .dateTime {
     font-size: 12px;
 }
+
+
