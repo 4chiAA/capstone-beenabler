@@ -4,6 +4,7 @@ import {useParams} from "react-router-dom";
 import {useEffect} from "react";
 import BeehiveDeleteButton from "./BeehiveDeleteButton.tsx";
 import BeehiveUpdateButton from "./BeehiveUpdateButton.tsx";
+import beehivePreview from "../assets/beehive_preview.png";
 
 type BeehiveDetailProps = {
     beehive: Beehive | undefined | null
@@ -27,7 +28,7 @@ export default function BeehiveDetail(props: Readonly<BeehiveDetailProps>) {
     return (
         <div className="beehive-container">
             <div className="logo">
-                <img src="/src/assets/beehive_preview.png" alt="Logo"/>
+                <img src={beehivePreview} alt="Logo"/>
             </div>
                 <article className="beehive">
                     <h3>{props.beehive.name}</h3>

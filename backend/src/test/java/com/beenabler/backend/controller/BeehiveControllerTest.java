@@ -26,7 +26,6 @@ class BeehiveControllerTest {
     private final String BASE_URL = "/api/beehives";
     @Autowired
     private MockMvc mockMvc;
-
     @Autowired
     private ObjectMapper objectMapper;
 
@@ -42,7 +41,7 @@ class BeehiveControllerTest {
 
     @Test
     @DirtiesContext
-    void getAllBeehives_whenBeehiveWithId1IsGiven_thenReturnListWithBeehive1() throws Exception {
+    void getAllBeehives_whenBeehiveWithValidIdIsGiven_thenReturnListWithBeehive1() throws Exception {
         //GIVEN
         BeehiveDTO firstBeehiveDTO = new BeehiveDTO("First Beehive", "left", "Colony");
         String firstBeehiveDTOJson = objectMapper.writeValueAsString(firstBeehiveDTO);

@@ -28,8 +28,8 @@ public class BeehiveController {
     }
 
     @PostMapping
-    public Beehive saveBeehive (@RequestBody BeehiveDTO beehive){
-        return beehiveService.saveBeehive(beehive);
+    public Beehive addBeehive(@RequestBody BeehiveDTO beehive){
+        return beehiveService.addBeehive(beehive);
     }
 
     @PutMapping("/{id}")
