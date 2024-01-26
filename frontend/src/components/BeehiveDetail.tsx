@@ -34,43 +34,55 @@ export default function BeehiveDetail() {
     }
 
     return (
-        <div className="beehive-container">
-            <div className="logo">
-                <img src={beehiveColonyIcon} alt="Logo"/>
+        <div>
+            <div className="beehive-container">
+                <div className="logo">
+                    <img src={beehiveColonyIcon} alt="Logo"/>
+                </div>
+
+                <div className="beehive-buttons">
+                    <BeehiveUpdateButton beehive={beehive}/>
+                    <BeehiveDeleteButton beehive={beehive}/>
+                </div>
+
+                <article className="beehive">
+                    <h3>{beehive.name}</h3>
+                    <p>{beehive.type}</p>
+                    <p>Standort: {beehive.location}</p>
+                    <p className="dateTime">Update: {beehive.dateTime}</p>
+                </article>
+
+                {entries.length > 0 && (
+                    <ul>
+                        {entries.map((entry: Entry) => (
+                            <ul key={entry.id}>
+                                <li>{entry.title}</li>
+                                <li>{entry.weight}</li>
+                                <li>{entry.feeding}</li>
+                                <li>{entry.honeyHarvest}</li>
+                                <li>{entry.varroaTreatment}</li>
+                                <li>{entry.queen}</li>
+                                <li>{entry.egg}</li>
+                                <li>{entry.brood}</li>
+                                <li>{entry.queenCells}</li>
+                            </ul>
+                        ))}
+                    </ul>
+                )}
             </div>
-
-            <div className="beehive-buttons">
-                <BeehiveUpdateButton beehive={beehive}/>
-                <BeehiveDeleteButton beehive={beehive}/>
-            </div>
-
-            <article className="beehive">
-                <h3>{beehive.name}</h3>
-                <p>{beehive.type}</p>
-                <p>Standort: {beehive.location}</p>
-                <p className="dateTime">Update: {beehive.dateTime}</p>
-            </article>
-
-            {entries.length > 0 && (
-                <ul>
-                    {entries.map((entry: Entry) => (
-                        <ul key={entry.id}>
-                            <li>{entry.title}</li>
-                            <li>{entry.weight}</li>
-                            <li>{entry.feeding}</li>
-                            <li>{entry.honeyHarvest}</li>
-                            <li>{entry.varroaTreatment}</li>
-                            <li>{entry.queen}</li>
-                            <li>{entry.egg}</li>
-                            <li>{entry.brood}</li>
-                            <li>{entry.queenCells}</li>
-                        </ul>
-                    ))}
-                </ul>
-            )}
             <div className="create-button">
                 <EntryCreateButton beehive={beehive}/>
             </div>
+            <footer>
+                <div className="divider"></div>
+                <div className="footer-container">
+                    <div className="left"></div>
+                    <div className="mid"></div>
+                    <div className="create-button">
+                        <EntryCreateButton beehive={beehive}/>
+                    </div>
+                </div>
+            </footer>
         </div>
     )
 }
