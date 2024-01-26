@@ -1,12 +1,12 @@
 import {Link} from "react-router-dom";
-import createBeehiveButton from "../assets/createBeehiveButton.svg";
+import createBeehiveIcon from "../assets/createBeehiveIcon.svg";
 
 
 export default function BeehiveCreateButton() {
 
     return (
         <Link to="/create">
-            <img src={createBeehiveButton} alt="Erstellen"/>
+            <img src={createBeehiveIcon} alt="Erstellen"/>
         </Link>
     )
 }

@@ -3,7 +3,7 @@ import {Beehive} from "../types/Beehive.ts";
 import {useEffect, useState} from "react";
 import BeehiveDeleteButton from "./BeehiveDeleteButton.tsx";
 import BeehiveUpdateButton from "./BeehiveUpdateButton.tsx";
-import beehivePreview from "../assets/beehive_preview.png";
+import beehiveColonyIcon from "../assets/beehiveColonyIcon.png";
 import {useParams} from "react-router-dom";
 import getBeehiveById from "../service/apiService.ts";
 import axios from "axios";
@@ -35,7 +35,7 @@ export default function BeehiveDetail() {
     return (
         <div className="beehive-container">
             <div className="logo">
-                <img src={beehivePreview} alt="Logo"/>
+                <img src={beehiveColonyIcon} alt="Logo"/>
             </div>
                 <article className="beehive">
                     <h3>{beehive.name}</h3>

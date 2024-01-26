@@ -102,8 +102,8 @@ export default function BeehiveUpdateForm() {
                     <option value="Jungvolk">Jungvolk</option>
                 </select>
                 <div className="new-beehive buttons">
-                    <button type="button" onClick={cancelUpdate}>Abbrechen</button>
                     <button type="submit">Bienenvolk anpassen</button>
+                    <button type="button" onClick={cancelUpdate}>Abbrechen</button>
                 </div>
             </form>
         </div>

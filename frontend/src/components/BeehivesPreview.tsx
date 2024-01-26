@@ -3,7 +3,7 @@ import {Beehive} from "../types/Beehive.ts";
 import {Link} from "react-router-dom";
 import BeehiveDeleteButton from "./BeehiveDeleteButton.tsx";
 import BeehiveUpdateButton from "./BeehiveUpdateButton.tsx";
-import beehivePreview from "../assets/beehive_preview.png";
+import beehiveColonyIcon from "../assets/beehiveColonyIcon.png";
 import {useEffect, useState} from "react";
 import axios from "axios";
 
@@ -32,7 +32,7 @@ export default function BeehivesPreview() {
                         <div className="left-part">
                             <Link to={"/beehive/" + beehive.id}>
                                 <div className="logo">
-                                    <img src={beehivePreview} alt="Logo"/>
+                                    <img src={beehiveColonyIcon} alt="Logo"/>
                                 </div>
                             </Link>
                             <div className="buttons">

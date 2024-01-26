@@ -80,8 +80,8 @@ export default function BeehiveCreateForm() {
                         <option value="Jungvolk">Jungvolk</option>
                     </select>
                     <div className="new-beehive buttons">
-                        <button type="button" onClick={cancelCreation}>Abbrechen</button>
                         <button type="submit">Bienenvolk erstellen</button>
+                        <button type="button" onClick={cancelCreation}>Abbrechen</button>
                     </div>
             </form>
         </div>
