@@ -1,4 +1,5 @@
 import BeehiveDetail from "../components/BeehiveDetail.tsx";
+import FooterBeehiveDetail from "../components/FooterBeehiveDetail.tsx";
 
 export default function BeehiveDetailPage() {
 
@@ -12,6 +13,7 @@ export default function BeehiveDetailPage() {
                 </div>
                 <BeehiveDetail/>
             </div>
+            <FooterBeehiveDetail/>
         </div>
     )
 }

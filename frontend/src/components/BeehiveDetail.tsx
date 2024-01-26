@@ -8,6 +8,7 @@ import {useParams} from "react-router-dom";
 import getBeehiveById from "../service/apiService.ts";
 import axios from "axios";
 import {Entry} from "../types/Entry.ts";
+import EntryCreateButton from "./EntryCreateButton.tsx";
 
 export default function BeehiveDetail() {
 
@@ -37,12 +38,19 @@ export default function BeehiveDetail() {
             <div className="logo">
                 <img src={beehiveColonyIcon} alt="Logo"/>
             </div>
-                <article className="beehive">
-                    <h3>{beehive.name}</h3>
-                    <p>{beehive.type}</p>
-                    <p>Standort: {beehive.location}</p>
-                    <p className="dateTime">Update: {beehive.dateTime}</p>
-                </article>
+
+            <div className="beehive-buttons">
+                <BeehiveUpdateButton beehive={beehive}/>
+                <BeehiveDeleteButton beehive={beehive}/>
+            </div>
+
+            <article className="beehive">
+                <h3>{beehive.name}</h3>
+                <p>{beehive.type}</p>
+                <p>Standort: {beehive.location}</p>
+                <p className="dateTime">Update: {beehive.dateTime}</p>
+            </article>
+
             {entries.length > 0 && (
                 <ul>
                     {entries.map((entry: Entry) => (
@@ -60,10 +68,8 @@ export default function BeehiveDetail() {
                     ))}
                 </ul>
             )}
-
-            <div className="beehive-buttons">
-                <BeehiveDeleteButton beehive={beehive}/>
-                <BeehiveUpdateButton beehive={beehive}/>
+            <div className="create-button">
+                <EntryCreateButton beehive={beehive}/>
             </div>
         </div>
     )

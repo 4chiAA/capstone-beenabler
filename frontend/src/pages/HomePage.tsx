@@ -1,6 +1,5 @@
-import "../stylesheets/HomePage.css";
 import BeehivesPreview from "../components/BeehivesPreview.tsx";
-import FooterHome from "../components/FooterHome.tsx";
+import FooterHomePage from "../components/FooterHomePage.tsx";
 import BeehiveCreateButton from "../components/BeehiveCreateButton.tsx";
 
 export default function HomePage(){
@@ -14,11 +13,11 @@ export default function HomePage(){
                     <div className="divider"></div>
                 </div>
                 <BeehivesPreview/>
-                <div className="create-button-home">
+                <div className="create-button">
                     <BeehiveCreateButton/>
                 </div>
             </div>
-            <FooterHome/>
+            <FooterHomePage/>
         </div>
     )
 }

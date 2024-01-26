@@ -1,6 +1,7 @@
-import "../stylesheets/FooterHome.css";
-import BeehiveCreateButton from "./BeehiveCreateButton.tsx";
-export default function FooterHome() {
+import "../stylesheets/Footer.css";
+import EntryCreateButton from "./EntryCreateButton.tsx";
+
+export default function FooterBeehiveDetail() {
 
     return (
         <footer>
@@ -8,8 +9,8 @@ export default function FooterHome() {
             <div className="footer-container">
                 <div className="left"></div>
                 <div className="mid"></div>
-                <div className="create-button-home">
-                    <BeehiveCreateButton/>
+                <div className="create-button">
+                    <EntryCreateButton/>
                 </div>
             </div>
         </footer>

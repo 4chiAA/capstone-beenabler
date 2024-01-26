@@ -4,7 +4,6 @@ import {Beehive} from "../types/Beehive.ts";
 import {ChangeEvent, FormEvent, useState} from "react";
 import {useNavigate} from "react-router-dom";
 
-
 export default function BeehiveCreateForm() {
 
     const [inputName, setInputName] = useState<string>("")
@@ -80,7 +79,7 @@ export default function BeehiveCreateForm() {
                         <option value="Jungvolk">Jungvolk</option>
                     </select>
                     <div className="new-beehive buttons">
-                        <button type="submit">Bienenvolk erstellen</button>
+                        <button type="submit">Bienenvolk hinzufügen</button>
                         <button type="button" onClick={cancelCreation}>Abbrechen</button>
                     </div>
             </form>

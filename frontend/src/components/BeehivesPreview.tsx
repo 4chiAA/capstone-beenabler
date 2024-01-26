@@ -36,8 +36,8 @@ export default function BeehivesPreview() {
                                 </div>
                             </Link>
                             <div className="buttons">
-                                <BeehiveDeleteButton beehive={beehive}/>
                                 <BeehiveUpdateButton beehive={beehive}/>
+                                <BeehiveDeleteButton beehive={beehive}/>
                             </div>
                         </div>
                         <article className="right-part">
