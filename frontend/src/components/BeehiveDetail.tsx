@@ -6,15 +6,25 @@ import BeehiveUpdateButton from "./BeehiveUpdateButton.tsx";
 import beehivePreview from "../assets/beehive_preview.png";
 import {useParams} from "react-router-dom";
 import getBeehiveById from "../service/apiService.ts";
+import axios from "axios";
+import {Entry} from "../types/Entry.ts";
 
 export default function BeehiveDetail() {
 
-    const {id} = useParams();
+    const {beehiveId} = useParams();
     const [beehive, setBeehive] = useState<Beehive | undefined | null>(undefined)
+    const [entries, setEntries] = useState<Entry[]>([])
 
     useEffect(() => {
-        getBeehiveById(String(id), setBeehive)
-    }, [id]);
+        getBeehiveById(String(beehiveId), setBeehive);
+        getAllEntriesForBeehive(String(beehiveId))
+    }, [beehiveId]);
+
+    function getAllEntriesForBeehive(beehiveId: string) {
+        axios.get("/api/entries/" + beehiveId)
+            .then(response => setEntries(response.data))
+            .catch((error: Error) => console.error(error));
+    }
 
     if (beehive === undefined) {
         return ("lade...");
@@ -33,6 +43,24 @@ export default function BeehiveDetail() {
                     <p>Standort: {beehive.location}</p>
                     <p className="dateTime">Update: {beehive.dateTime}</p>
                 </article>
+            {entries.length > 0 && (
+                <ul>
+                    {entries.map((entry: Entry) => (
+                        <ul key={entry.id}>
+                            <li>{entry.title}</li>
+                            <li>{entry.weight}</li>
+                            <li>{entry.feeding}</li>
+                            <li>{entry.honeyHarvest}</li>
+                            <li>{entry.varroaTreatment}</li>
+                            <li>{entry.queen}</li>
+                            <li>{entry.egg}</li>
+                            <li>{entry.brood}</li>
+                            <li>{entry.queenCells}</li>
+                        </ul>
+                    ))}
+                </ul>
+            )}
+
             <div className="beehive-buttons">
                 <BeehiveDeleteButton beehive={beehive}/>
                 <BeehiveUpdateButton beehive={beehive}/>

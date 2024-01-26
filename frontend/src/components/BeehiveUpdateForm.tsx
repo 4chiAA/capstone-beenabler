@@ -7,7 +7,7 @@ import getBeehiveById from "../service/apiService.ts";
 
 export default function BeehiveUpdateForm() {
 
-    const {id} = useParams();
+    const {beehiveId} = useParams();
     const [beehive, setBeehive] = useState<Beehive | undefined | null>(undefined)
     const [inputName, setInputName] = useState<string>(String(""))
     const [inputLocation, setInputLocation] = useState<string>(String(""))
@@ -16,11 +16,11 @@ export default function BeehiveUpdateForm() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!beehive || (beehive && id !== id)) {
-            getBeehiveById(String(id), setBeehive);
+        if (!beehive || (beehive && beehiveId !== beehiveId)) {
+            getBeehiveById(String(beehiveId), setBeehive);
             setLoading(true);
         }
-    }, [beehive, id]);
+    }, [beehive, beehiveId]);
 
     useEffect(() => {
         if (beehive) {
@@ -31,10 +31,10 @@ export default function BeehiveUpdateForm() {
         setLoading(false);
     }, [beehive]);
 
-    function putBeehive(id: string, updatedBeehive: Beehive) {
-        axios.put<Beehive>("/api/beehives/" + id, updatedBeehive)
+    function putBeehive(beehiveId: string, updatedBeehive: Beehive) {
+        axios.put<Beehive>("/api/beehives/" + beehiveId, updatedBeehive)
             .then(() => {
-                navigate("/beehive/" + id);
+                navigate("/beehive/" + beehiveId);
             })
             .catch(handleUpdateError);
     }
@@ -65,17 +65,17 @@ export default function BeehiveUpdateForm() {
         event.preventDefault()
         const updatedBeehive: Beehive =
             {
-                id: id,
+                id: beehiveId,
                 dateTime: beehive?.dateTime,
                 name: inputName,
                 location: inputLocation,
                 type: inputType
             }
-        putBeehive(String(id), updatedBeehive);
+        putBeehive(String(beehiveId), updatedBeehive);
     }
 
     function cancelUpdate() {
-        navigate("/beehive/" + id);
+        navigate("/beehive/" + beehiveId);
     }
 
     if (loading) {

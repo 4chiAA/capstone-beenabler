@@ -13,9 +13,9 @@ export default function App() {
           <Header/>
           <Routes>
               <Route path={"/"} element={<HomePage/>}/>
-              <Route path={"/beehive/:id"} element={<BeehiveDetailPage/>}/>
+              <Route path={"/beehive/:beehiveId"} element={<BeehiveDetailPage/>}/>
               <Route path={"/create"} element={<BeehiveCreatePage/>}/>
-              <Route path={"/beehive/update/:id"} element={<BeehiveUpdatePage/>}/>
+              <Route path={"/beehive/update/:beehiveId"} element={<BeehiveUpdatePage/>}/>
           </Routes>
       </div>
   )
