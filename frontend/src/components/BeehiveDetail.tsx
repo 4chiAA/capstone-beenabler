@@ -1,27 +1,24 @@
 import "../stylesheets/BeehiveDetail.css"
 import {Beehive} from "../types/Beehive.ts";
-import {useParams} from "react-router-dom";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import BeehiveDeleteButton from "./BeehiveDeleteButton.tsx";
 import BeehiveUpdateButton from "./BeehiveUpdateButton.tsx";
 import beehivePreview from "../assets/beehive_preview.png";
+import {useParams} from "react-router-dom";
+import getBeehiveById from "../service/apiService.ts";
 
-type BeehiveDetailProps = {
-    beehive: Beehive | undefined | null
-    getBeehiveById: (id: string) => void
-}
-
-export default function BeehiveDetail(props: Readonly<BeehiveDetailProps>) {
+export default function BeehiveDetail() {
 
     const {id} = useParams();
+    const [beehive, setBeehive] = useState<Beehive | undefined | null>(undefined)
 
     useEffect(() => {
-        props.getBeehiveById(String(id))
-    }, [id, props]);
+        getBeehiveById(String(id), setBeehive)
+    }, [id]);
 
-    if (props.beehive === undefined) {
+    if (beehive === undefined) {
         return ("lade...");
-    } else if (props.beehive === null) {
+    } else if (beehive === null) {
         return ("Kein Bienenvolk mit dieser ID vorhanden")
     }
 
@@ -31,16 +28,15 @@ export default function BeehiveDetail(props: Readonly<BeehiveDetailProps>) {
                 <img src={beehivePreview} alt="Logo"/>
             </div>
                 <article className="beehive">
-                    <h3>{props.beehive.name}</h3>
-                    <p>{props.beehive.type}</p>
-                    <p>Standort: {props.beehive.location}</p>
-                    <p className="dateTime">Update: {props.beehive.dateTime}</p>
+                    <h3>{beehive.name}</h3>
+                    <p>{beehive.type}</p>
+                    <p>Standort: {beehive.location}</p>
+                    <p className="dateTime">Update: {beehive.dateTime}</p>
                 </article>
             <div className="beehive-buttons">
-                <BeehiveDeleteButton beehive={props.beehive}/>
-                <BeehiveUpdateButton beehive={props.beehive}/>
+                <BeehiveDeleteButton beehive={beehive}/>
+                <BeehiveUpdateButton beehive={beehive}/>
             </div>
-
         </div>
     )
 }

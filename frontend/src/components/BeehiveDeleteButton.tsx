@@ -3,6 +3,7 @@ import axios from "axios";
 import BeehiveDeleteConfirmation from "./BeehiveDeleteConfirmation.tsx";
 import {Beehive} from "../types/Beehive.ts";
 import deleteBeehiveButton from "../assets/deleteBeehiveButton.svg";
+import {useNavigate} from "react-router-dom";
 
 export type BeehiveDeleteButtonProps = {
     beehive: Beehive | undefined | null
@@ -11,12 +12,13 @@ export type BeehiveDeleteButtonProps = {
 export default function BeehiveDeleteButton(props: Readonly<BeehiveDeleteButtonProps>) {
 
     const [showConfirmation, setShowConfirmation] = useState(false);
+    const navigate = useNavigate();
 
     const handleDelete = async () => {
         try {
             await axios.delete("/api/beehives/" + props.beehive?.id);
             setShowConfirmation(false);
-            window.location.href = "/";
+            navigate("/");
         } catch (error) {
             alert("Fehler beim löschen");
             setShowConfirmation(false);

@@ -1,12 +1,6 @@
-import {Beehive} from "../types/Beehive.ts";
 import BeehiveDetail from "../components/BeehiveDetail.tsx";
 
-type BeehiveDetailPageProps = {
-    beehive: Beehive | undefined | null
-    getBeehiveById: (id: string) => void
-}
-
-export default function BeehiveDetailPage(props: Readonly<BeehiveDetailPageProps>) {
+export default function BeehiveDetailPage() {
 
     return (
         <div className="page-container">
@@ -16,7 +10,7 @@ export default function BeehiveDetailPage(props: Readonly<BeehiveDetailPageProps
                     <h2>Dein Bienenvolk</h2>
                     <div className="divider"></div>
                 </div>
-                <BeehiveDetail beehive={props.beehive} getBeehiveById={props.getBeehiveById}/>
+                <BeehiveDetail/>
             </div>
         </div>
     )
