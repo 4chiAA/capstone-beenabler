@@ -1,3 +1,4 @@
+import "../stylesheets/EntryCreateForm.css";
 import {ChangeEvent, FormEvent, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
@@ -98,7 +99,7 @@ export default function EntryCreateForm() {
 
     return (
         <div className="form-create-container">
-            <form className="new-entrie" onSubmit={createNewEntry}>
+            <form className="new-entry" onSubmit={createNewEntry}>
                 <p>Titel</p>
                 <input
                     type={"text"}

@@ -1,0 +1,21 @@
+.form-create-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    background-color: #FFC960;
+    border: 1px solid;
+    border-radius: 10px;
+}
+.new-entry {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+}
+
+.new-entry input {
+    margin-bottom: 10px;
+}
+
+.new-entry .buttons {
+    gap: 15px;
+}

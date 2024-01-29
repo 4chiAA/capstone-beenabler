@@ -46,28 +46,34 @@ export default function BeehiveDetail() {
                 </div>
 
                 <article className="beehive">
-                    <h3>{beehive.name}</h3>
+                    <h2>{beehive.name}</h2>
                     <p>{beehive.type}</p>
                     <p>Standort: {beehive.location}</p>
                     <p className="dateTime">Update: {beehive.dateTime}</p>
                 </article>
 
                 {entries.length > 0 && (
-                    <ul>
+                    <div className="entry-container">
+                        <h2>Einträge</h2>
                         {entries.map((entry: Entry) => (
-                            <ul key={entry.id}>
-                                <li>{entry.title}</li>
-                                <li>{entry.weight}</li>
-                                <li>{entry.feeding}</li>
-                                <li>{entry.honeyHarvest}</li>
-                                <li>{entry.varroaTreatment}</li>
-                                <li>{entry.queen}</li>
-                                <li>{entry.egg}</li>
-                                <li>{entry.brood}</li>
-                                <li>{entry.queenCells}</li>
-                            </ul>
+                            <article className="entry" key={entry.id}>
+                                <h3 className="entry-title">{entry.title}</h3>
+                                <section className="entry-actions">
+                                    {entry.weight > 0 ? <p className="entry-number">Gewicht {entry.weight} kg</p> : <p className="entry-number">Gewicht -</p>}
+                                    {entry.weight > 0 ? <p className="entry-number">Fütterung {entry.feeding} kg</p> : <p className="entry-number">Fütterung -</p>}
+                                    {entry.weight > 0 ? <p className="entry-number">Honigentnahme {entry.honeyHarvest} kg</p> : <p className="entry-number">Honigentnahme -</p>}
+                                </section>
+                                <h3>Sichtungen</h3>
+                                <section className="entry-sightings">
+                                    <p>Varroabehandlung <input type="checkbox" checked={entry.varroaTreatment} disabled /></p>
+                                    <p>Königin <input type="checkbox" checked={entry.queen} disabled /></p>
+                                    <p>Stifte <input type="checkbox" checked={entry.egg} disabled /></p>
+                                    <p>Brut <input type="checkbox" checked={entry.brood} disabled /></p>
+                                    <p>Weiselzellen <input type="checkbox" checked={entry.queenCells} disabled /></p>
+                                </section>
+                            </article>
                         ))}
-                    </ul>
+                    </div>
                 )}
             </div>
             <div className="create-button">

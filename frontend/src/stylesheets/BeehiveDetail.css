@@ -33,3 +33,47 @@
     column-gap: 10px;
     cursor: pointer;
 }
+
+.entry-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+    gap: 12px;
+}
+
+.entry-container .entry {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #214A73;
+    background-color: #FFC960;
+    padding: 10px;
+}
+
+.entry .entry-title {
+
+}
+
+.entry .entry-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding-bottom: 10px;
+}
+
+.entry .entry-number {
+    margin-right: 15px;
+}
+
+.entry .entry-sightings {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+input[type="checkbox"] {
+    margin-right: 10px;
+}
