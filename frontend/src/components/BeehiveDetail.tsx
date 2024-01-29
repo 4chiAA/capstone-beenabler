@@ -46,10 +46,10 @@ export default function BeehiveDetail() {
                 </div>
 
                 <article className="beehive">
-                    <h2>{beehive.name}</h2>
+                    <h1 className="heading">{beehive.name}</h1>
                     <p>{beehive.type}</p>
                     <p>Standort: {beehive.location}</p>
-                    <p className="dateTime">Update: {beehive.dateTime}</p>
+                    <p className="dateTime">Update: {beehive.dateTime} Uhr</p>
                 </article>
 
                 {entries.length > 0 && (
@@ -60,8 +60,8 @@ export default function BeehiveDetail() {
                                 <h3 className="entry-title">{entry.title}</h3>
                                 <section className="entry-actions">
                                     {entry.weight > 0 ? <p className="entry-number">Gewicht {entry.weight} kg</p> : <p className="entry-number">Gewicht -</p>}
-                                    {entry.weight > 0 ? <p className="entry-number">Fütterung {entry.feeding} kg</p> : <p className="entry-number">Fütterung -</p>}
-                                    {entry.weight > 0 ? <p className="entry-number">Honigentnahme {entry.honeyHarvest} kg</p> : <p className="entry-number">Honigentnahme -</p>}
+                                    {entry.feeding > 0 ? <p className="entry-number">Fütterung {entry.feeding} kg</p> : <p className="entry-number">Fütterung -</p>}
+                                    {entry.honeyHarvest > 0 ? <p className="entry-number">Honigentnahme {entry.honeyHarvest} kg</p> : <p className="entry-number">Honigentnahme -</p>}
                                 </section>
                                 <h3>Sichtungen</h3>
                                 <section className="entry-sightings">

@@ -9,7 +9,13 @@
 .new-entry {
     display: flex;
     flex-direction: column;
-    padding: 30px;
+    padding-top: 25px;
+    padding-bottom: 20px;
+}
+
+.new-entry .heading {
+    padding-top: 10px;
+    padding-bottom: 5px;
 }
 
 .new-entry input {
@@ -17,5 +23,8 @@
 }
 
 .new-entry .buttons {
+    display: flex;
+    flex-direction: column;
+    padding-top: 15px;
     gap: 15px;
 }

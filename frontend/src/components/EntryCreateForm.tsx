@@ -120,34 +120,45 @@ export default function EntryCreateForm() {
                     type={"number"}
                     value={inputHoneyHarvest}
                     onChange={createInputHoneyHarvest}/>
-                <h3>Sichtungen</h3>
-                <p>Varroamilbe</p>
-                <input
-                    type={"checkbox"}
-                    checked={inputVarroaTreatment}
-                    onChange={createInputVarroaTreatment}/>
-                <p>Königin</p>
-                <input
-                    type={"checkbox"}
-                    checked={inputQueen}
-                    onChange={createInputQueen}/>
-                <p>Stifte</p>
-                <input
-                    type={"checkbox"}
-                    checked={inputEgg}
-                    onChange={createInputEgg}/>
-                <p>Brut</p>
-                <input
-                    type={"checkbox"}
-                    checked={inputBrood}
-                    onChange={createInputBrood}/>
-                <p>Weiselzellen</p>
-                <input
-                    type={"checkbox"}
-                    checked={inputQueenCells}
-                    onChange={createInputQueenCells}/>
+                <h3 className="heading">Sichtungen</h3>
+                <p>
+                    <input
+                        type={"checkbox"}
+                        checked={inputVarroaTreatment}
+                        onChange={createInputVarroaTreatment}/>
+                    Varroamilbe
+                </p>
+                <p>
+                    <input
+                        type={"checkbox"}
+                        checked={inputQueen}
+                        onChange={createInputQueen}/>
+                    Königin
+                </p>
 
-                <div className="new-beehive buttons">
+                <p>
+                    <input
+                        type={"checkbox"}
+                        checked={inputEgg}
+                        onChange={createInputEgg}/>
+                    Stifte
+                </p>
+                <p>
+                    <input
+                        type={"checkbox"}
+                        checked={inputBrood}
+                        onChange={createInputBrood}/>
+                    Brut
+                </p>
+                <p>
+                    <input
+                        type={"checkbox"}
+                        checked={inputQueenCells}
+                        onChange={createInputQueenCells}/>
+                    Weiselzellen
+                </p>
+
+                <div className="buttons">
                     <button type="submit">Eintrag hinzufügen</button>
                     <button type="button" onClick={cancelCreation}>Abbrechen</button>
                 </div>
