@@ -133,40 +133,35 @@ export default function EntryCreateForm() {
                         type={"checkbox"}
                         checked={inputVarroaTreatment}
                         onChange={createInputVarroaTreatment}
-                    />
-                    Varroamilbe
+                    /> Varroamilbe
                 </p>
                 <p>
                     <input
                         type={"checkbox"}
                         checked={inputQueen}
                         onChange={createInputQueen}
-                    />
-                    Königin
+                    /> Königin
                 </p>
                 <p>
                     <input
                         type={"checkbox"}
                         checked={inputEgg}
                         onChange={createInputEgg}
-                    />
-                    Stifte
+                    /> Stifte
                 </p>
                 <p>
                     <input
                         type={"checkbox"}
                         checked={inputBrood}
                         onChange={createInputBrood}
-                    />
-                    Brut
+                    /> Brut
                 </p>
                 <p>
-                        <input
-                            type={"checkbox"}
-                            checked={inputQueenCells}
-                            onChange={createInputQueenCells}
-                        />
-                    Weiselzellen
+                    <input
+                        type={"checkbox"}
+                        checked={inputQueenCells}
+                        onChange={createInputQueenCells}
+                    /> Weiselzellen
                 </p>
 
                 <div className="buttons">
