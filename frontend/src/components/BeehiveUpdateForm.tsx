@@ -16,7 +16,7 @@ export default function BeehiveUpdateForm() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (!beehive || (beehive && beehiveId !== beehiveId)) {
+        if (!beehive || (beehive &&  beehive.id !== beehiveId)) {
             getBeehiveById(String(beehiveId), setBeehive);
             setLoading(true);
         }

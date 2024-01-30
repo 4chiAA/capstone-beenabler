@@ -77,6 +77,7 @@ export default function EntryCreateForm() {
 
     function createNewEntry(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
+
         const newEntry: Entry =
             {
                 title: inputTitle,
@@ -103,35 +104,44 @@ export default function EntryCreateForm() {
                 <input
                     type={"text"}
                     value={inputTitle}
-                    onChange={createInputTitle}/>
+                    onChange={createInputTitle}
+                />
                 <p>Gewicht</p>
                 <input
                     type={"number"}
                     value={inputWeight}
-                    onChange={createInputWeight}/>
+                    required
+                    onChange={createInputWeight}
+                />
                 <p>Fütterung</p>
                 <input
                     type={"number"}
                     value={inputFeeding}
-                    onChange={createInputFeeding}/>
+                    required
+                    onChange={createInputFeeding}
+                />
                 <p>Honigentnahme</p>
                 <input
                     type={"number"}
                     value={inputHoneyHarvest}
-                    onChange={createInputHoneyHarvest}/>
+                    required
+                    onChange={createInputHoneyHarvest}
+                />
                 <h3 className="heading">Sichtungen</h3>
                 <p>
                     <input
                         type={"checkbox"}
                         checked={inputVarroaTreatment}
-                        onChange={createInputVarroaTreatment}/>
+                        onChange={createInputVarroaTreatment}
+                    />
                     Varroamilbe
                 </p>
                 <p>
                     <input
                         type={"checkbox"}
                         checked={inputQueen}
-                        onChange={createInputQueen}/>
+                        onChange={createInputQueen}
+                    />
                     Königin
                 </p>
 
@@ -139,21 +149,24 @@ export default function EntryCreateForm() {
                     <input
                         type={"checkbox"}
                         checked={inputEgg}
-                        onChange={createInputEgg}/>
+                        onChange={createInputEgg}
+                    />
                     Stifte
                 </p>
                 <p>
                     <input
                         type={"checkbox"}
                         checked={inputBrood}
-                        onChange={createInputBrood}/>
+                        onChange={createInputBrood}
+                    />
                     Brut
                 </p>
                 <p>
                     <input
                         type={"checkbox"}
                         checked={inputQueenCells}
-                        onChange={createInputQueenCells}/>
+                        onChange={createInputQueenCells}
+                    />
                     Weiselzellen
                 </p>
 
