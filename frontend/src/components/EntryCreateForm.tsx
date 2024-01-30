@@ -144,7 +144,6 @@ export default function EntryCreateForm() {
                     />
                     Königin
                 </p>
-
                 <p>
                     <input
                         type={"checkbox"}
@@ -162,11 +161,11 @@ export default function EntryCreateForm() {
                     Brut
                 </p>
                 <p>
-                    <input
-                        type={"checkbox"}
-                        checked={inputQueenCells}
-                        onChange={createInputQueenCells}
-                    />
+                        <input
+                            type={"checkbox"}
+                            checked={inputQueenCells}
+                            onChange={createInputQueenCells}
+                        />
                     Weiselzellen
                 </p>
 
