@@ -9,6 +9,7 @@ import getBeehiveById from "../service/apiService.ts";
 import axios from "axios";
 import {Entry} from "../types/Entry.ts";
 import EntryCreateButton from "./EntryCreateButton.tsx";
+import deleteEntryIcon from "../assets/deleteEntryIcon.svg";
 
 export default function BeehiveDetail() {
 
@@ -28,6 +29,20 @@ export default function BeehiveDetail() {
                 setEntries(reversedEntries);
             })
             .catch((error: Error) => console.error(error));
+    }
+
+    const deleteEntry = async (entryID: string)=> {
+
+        const confirmation = window.confirm("Möchtest du diesen Eintrag wirklich löschen?");
+
+        if (confirmation) {
+            try {
+                await axios.delete("/api/entries/" + entryID);
+                window.location.href = "/beehive/" + beehiveId;
+            } catch (error) {
+                alert("Fehler beim löschen");
+            }
+        }
     }
 
     if (beehive === undefined) {
@@ -74,6 +89,12 @@ export default function BeehiveDetail() {
                                     <p>Brut <input type="checkbox" checked={entry.brood} disabled /></p>
                                     <p>Weiselzellen <input type="checkbox" checked={entry.queenCells} disabled /></p>
                                 </section>
+                                <input
+                                    type="image"
+                                    src={deleteEntryIcon}
+                                    alt="Eintrag löschen"
+                                    onClick={() => entry.id && deleteEntry(entry.id)}
+                                />
                             </article>
                         ))}
                     </div>
