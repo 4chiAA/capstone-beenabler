@@ -10,36 +10,30 @@
     align-items: center;
     justify-content: space-around;
     background-color: #FFC960;
+    padding: 20px 5px 15px 5px;
     border: 1px solid;
     border-radius: 10px;
     color: inherit;
 }
 
-.beehives-preview .left-part {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+.beehives-preview .logo img {
+    padding-top: 5px;
+    max-height: 70px;
 }
 
-.beehives-preview .left-part .logo img {
-    padding-top: 5px;
-    max-height: 60px;
+.beehives-preview .description {
+    color: #214A73;
+
+}
+
+.beehives-preview .description .dateTime {
+    font-size: 12px;
 }
 
 .beehives-preview .buttons {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content: flex-start;
     cursor: pointer;
 }
-
-.beehives-preview .right-part .description {
-    color: #214A73;
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
-.beehives-preview .right-part .description .dateTime {
-    font-size: 12px;
-}
-
 

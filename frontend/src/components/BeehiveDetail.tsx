@@ -10,6 +10,7 @@ import axios from "axios";
 import {Entry} from "../types/Entry.ts";
 import EntryCreateButton from "./EntryCreateButton.tsx";
 import deleteEntryIcon from "../assets/deleteEntryIcon.svg";
+import beehiveNucleusIcon from "../assets/beehiveNucleusIcon.png";
 
 export default function BeehiveDetail() {
 
@@ -55,7 +56,7 @@ export default function BeehiveDetail() {
         <div>
             <div className="beehive-container">
                 <div className="logo">
-                    <img src={beehiveColonyIcon} alt="Logo"/>
+                    <img src={beehive.type === "Wirtschaftsvolk" ? beehiveColonyIcon : beehiveNucleusIcon} alt="Logo" />
                 </div>
 
                 <div className="beehive-buttons">
