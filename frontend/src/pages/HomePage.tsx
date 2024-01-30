@@ -1,14 +1,8 @@
-import "../stylesheets/HomePage.css";
-import {Beehive} from "../types/Beehive.ts";
 import BeehivesPreview from "../components/BeehivesPreview.tsx";
-import FooterHome from "../components/FooterHome.tsx";
+import FooterHomePage from "../components/FooterHomePage.tsx";
 import BeehiveCreateButton from "../components/BeehiveCreateButton.tsx";
 
-type HomeProps = {
-    beehivesPreview: Beehive[]
-}
-
-export default function HomePage(props: Readonly<HomeProps>){
+export default function HomePage(){
 
     return (
         <div className="page-container">
@@ -18,12 +12,12 @@ export default function HomePage(props: Readonly<HomeProps>){
                     <h2>Deine Bienenvölker</h2>
                     <div className="divider"></div>
                 </div>
-                <BeehivesPreview beehives={props.beehivesPreview}/>
-                <div className="create-button-home">
+                <BeehivesPreview/>
+                <div className="create-button">
                     <BeehiveCreateButton/>
                 </div>
             </div>
-            <FooterHome/>
+            <FooterHomePage/>
         </div>
     )
 }

@@ -2,13 +2,14 @@ import "../stylesheets/BeehiveCreateForm.css";
 import axios from "axios";
 import {Beehive} from "../types/Beehive.ts";
 import {ChangeEvent, FormEvent, useState} from "react";
-
+import {useNavigate} from "react-router-dom";
 
 export default function BeehiveCreateForm() {
 
     const [inputName, setInputName] = useState<string>("")
     const [inputLocation, setInputLocation] = useState<string>("")
     const [inputType, setInputType] = useState<string>("")
+    const navigate = useNavigate();
 
     function createInputName(event: ChangeEvent<HTMLInputElement>) {
         setInputName(event.target.value)
@@ -29,9 +30,8 @@ export default function BeehiveCreateForm() {
         }
 
         axios.post<Beehive>("/api/beehives", newBeehive)
-            .then(response => {
-                console.log("Neues Bienenvolk " + response.data.name + " wurde erstellt");
-                window.location.href = "/";
+            .then(() => {
+                navigate("/");
             })
             .catch((error) => {
                 if (error.response) {
@@ -56,7 +56,7 @@ export default function BeehiveCreateForm() {
     }
 
     function cancelCreation() {
-        window.location.href = "/";
+        navigate("/");
     }
 
     return (
@@ -79,8 +79,8 @@ export default function BeehiveCreateForm() {
                         <option value="Jungvolk">Jungvolk</option>
                     </select>
                     <div className="new-beehive buttons">
+                        <button type="submit">Bienenvolk hinzufügen</button>
                         <button type="button" onClick={cancelCreation}>Abbrechen</button>
-                        <button type="submit">Bienenvolk erstellen</button>
                     </div>
             </form>
         </div>

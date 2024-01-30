@@ -1,15 +1,15 @@
-import BeehiveUpdateForm from "../components/BeehiveUpdateForm.tsx";
+import EntryCreateForm from "../components/EntryCreateForm.tsx";
 
-export default function BeehiveUpdatePage(){
+export default function EntryCreatePage(){
 
     return (
         <div className="page-container">
             <div className="title-container">
                 <div className="divider"></div>
-                <h2>Bienenvolk anpassen</h2>
+                <h2>Eintrag erstellen</h2>
                 <div className="divider"></div>
             </div>
-            <BeehiveUpdateForm/>
+            <EntryCreateForm/>
         </div>
     )
 }

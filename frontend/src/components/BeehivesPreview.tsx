@@ -3,31 +3,41 @@ import {Beehive} from "../types/Beehive.ts";
 import {Link} from "react-router-dom";
 import BeehiveDeleteButton from "./BeehiveDeleteButton.tsx";
 import BeehiveUpdateButton from "./BeehiveUpdateButton.tsx";
-import beehivePreview from "../assets/beehive_preview.png";
+import beehiveColonyIcon from "../assets/beehiveColonyIcon.png";
+import {useEffect, useState} from "react";
+import axios from "axios";
 
-type BeehivePreviewProps = {
-    beehives: Beehive[]
-}
+export default function BeehivesPreview() {
 
-export default function BeehivesPreview(props: Readonly<BeehivePreviewProps>) {
+    const [beehivesPreview, setBeehivesPreview] = useState<Beehive[]>([])
 
-    if (props.beehives.length === 0) {
+    useEffect(() => {
+        getAllBeehives();
+    }, []);
+
+    function getAllBeehives() {
+        axios.get("/api/beehives")
+            .then(response => setBeehivesPreview(response.data))
+            .catch((error: Error) => console.error(error));
+    }
+
+    if (beehivesPreview.length === 0) {
         return ("Du hast noch kein Bienenvolk angelegt")
     }
 
     return (
         <div className="beehives-preview-container">
-                {props.beehives.map((beehive: Beehive) => (
+                {beehivesPreview.map((beehive: Beehive) => (
                     <div className="beehives-preview" key={beehive.id}>
                         <div className="left-part">
                             <Link to={"/beehive/" + beehive.id}>
                                 <div className="logo">
-                                    <img src={beehivePreview} alt="Logo"/>
+                                    <img src={beehiveColonyIcon} alt="Logo"/>
                                 </div>
                             </Link>
                             <div className="buttons">
-                                <BeehiveDeleteButton beehive={beehive}/>
                                 <BeehiveUpdateButton beehive={beehive}/>
+                                <BeehiveDeleteButton beehive={beehive}/>
                             </div>
                         </div>
                         <article className="right-part">

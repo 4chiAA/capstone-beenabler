@@ -2,7 +2,7 @@ import {useState} from "react";
 import axios from "axios";
 import BeehiveDeleteConfirmation from "./BeehiveDeleteConfirmation.tsx";
 import {Beehive} from "../types/Beehive.ts";
-import deleteBeehiveButton from "../assets/deleteBeehiveButton.svg";
+import deleteBeehiveIcon from "../assets/deleteBeehiveIcon.svg";
 
 export type BeehiveDeleteButtonProps = {
     beehive: Beehive | undefined | null
@@ -31,7 +31,7 @@ export default function BeehiveDeleteButton(props: Readonly<BeehiveDeleteButtonP
         <div>
             <input
                 type="image"
-                src={deleteBeehiveButton}
+                src={deleteBeehiveIcon}
                 alt="Löschen"
                 onClick={handleConfirmation}
                 />

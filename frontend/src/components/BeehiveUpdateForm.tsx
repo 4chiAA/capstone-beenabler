@@ -2,37 +2,42 @@ import "../stylesheets/BeehiveCreateForm.css";
 import axios, {AxiosError} from "axios";
 import {Beehive} from "../types/Beehive.ts";
 import {ChangeEvent, FormEvent, useEffect, useState} from "react";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
+import getBeehiveById from "../service/apiService.ts";
 
-type BeehiveUpdateProps = {
-    beehive: Beehive | undefined | null
-    getBeehiveById: (id: string) => void
-}
+export default function BeehiveUpdateForm() {
 
-export default function BeehiveUpdateForm(props: Readonly<BeehiveUpdateProps>) {
-
-    const {id} = useParams();
-    const [loading, setLoading] = useState(true);
+    const {beehiveId} = useParams();
+    const [beehive, setBeehive] = useState<Beehive | undefined | null>(undefined)
     const [inputName, setInputName] = useState<string>(String(""))
     const [inputLocation, setInputLocation] = useState<string>(String(""))
     const [inputType, setInputType] = useState<string>(String(""))
+    const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        if (!props.beehive || (props.beehive && props.beehive.id !== id)) {
-            // Nur laden, wenn das beehive nicht vorhanden ist oder die ID unterschiedlich ist
-            props.getBeehiveById(String(id));
+        if (!beehive || (beehive &&  beehive.id !== beehiveId)) {
+            getBeehiveById(String(beehiveId), setBeehive);
             setLoading(true);
         }
-    }, [id, props]);
+    }, [beehive, beehiveId]);
 
     useEffect(() => {
-        if (props.beehive) {
-            setInputName(props.beehive.name || "");
-            setInputLocation(props.beehive.location || "");
-            setInputType(props.beehive.type || "");
+        if (beehive) {
+            setInputName(beehive.name || "");
+            setInputLocation(beehive.location || "");
+            setInputType(beehive.type || "");
         }
         setLoading(false);
-    }, [props.beehive]);
+    }, [beehive]);
+
+    function putBeehive(beehiveId: string, updatedBeehive: Beehive) {
+        axios.put<Beehive>("/api/beehives/" + beehiveId, updatedBeehive)
+            .then(() => {
+                navigate("/beehive/" + beehiveId);
+            })
+            .catch(handleUpdateError);
+    }
 
     function updateInputName(event: ChangeEvent<HTMLInputElement>) {
         setInputName(event.target.value)
@@ -44,15 +49,6 @@ export default function BeehiveUpdateForm(props: Readonly<BeehiveUpdateProps>) {
 
     function updateInputType(event: ChangeEvent<HTMLSelectElement>) {
         setInputType(event.target.value)
-    }
-
-    function putBeehive(id: string, updatedBeehive: Beehive) {
-        axios.put<Beehive>("/api/beehives/" + id, updatedBeehive)
-            .then(response => {
-                console.log("Bienenvolk " + response.data.name + " wurde angepasst");
-                window.location.href = "/";
-            })
-            .catch(handleUpdateError);
     }
 
     function handleUpdateError(error: AxiosError) {
@@ -69,17 +65,17 @@ export default function BeehiveUpdateForm(props: Readonly<BeehiveUpdateProps>) {
         event.preventDefault()
         const updatedBeehive: Beehive =
             {
-                id: props.beehive?.id,
-                dateTime: props.beehive?.dateTime,
+                id: beehiveId,
+                dateTime: beehive?.dateTime,
                 name: inputName,
                 location: inputLocation,
                 type: inputType
             }
-        putBeehive(String(props.beehive?.id), updatedBeehive);
+        putBeehive(String(beehiveId), updatedBeehive);
     }
 
-    function cancelCreation() {
-        window.location.href = "/";
+    function cancelUpdate() {
+        navigate("/beehive/" + beehiveId);
     }
 
     if (loading) {
@@ -106,8 +102,8 @@ export default function BeehiveUpdateForm(props: Readonly<BeehiveUpdateProps>) {
                     <option value="Jungvolk">Jungvolk</option>
                 </select>
                 <div className="new-beehive buttons">
-                    <button type="button" onClick={cancelCreation}>Abbrechen</button>
                     <button type="submit">Bienenvolk anpassen</button>
+                    <button type="button" onClick={cancelUpdate}>Abbrechen</button>
                 </div>
             </form>
         </div>
