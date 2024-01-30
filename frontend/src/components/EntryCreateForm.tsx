@@ -7,7 +7,6 @@ import {Entry} from "../types/Entry.ts";
 export default function EntryCreateForm() {
 
     const {beehiveId} = useParams();
-    console.log(beehiveId)
 
     const [inputTitle, setInputTitle] = useState<string>("")
     const [inputWeight, setInputWeight] = useState<number>(0)

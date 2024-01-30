@@ -23,7 +23,10 @@ export default function BeehiveDetail() {
 
     function getAllEntriesForBeehive(beehiveId: string) {
         axios.get("/api/entries/" + beehiveId)
-            .then(response => setEntries(response.data))
+            .then(response => {
+                const reversedEntries = response.data.reverse();
+                setEntries(reversedEntries);
+            })
             .catch((error: Error) => console.error(error));
     }
 
