@@ -70,7 +70,7 @@ export default function BeehiveDetail() {
                                 <section className="entry-sightings">
                                     <p>Varroabehandlung <input type="checkbox" checked={entry.varroaTreatment} disabled /></p>
                                     <p>Königin <input type="checkbox" checked={entry.queen} disabled /></p>
-                                    <p>Stifte <input type="checkbox" checked={entry.egg} disabled /></p>
+                                    <p>Stifte <input type="checkbox" checked={entry.eggs} disabled /></p>
                                     <p>Brut <input type="checkbox" checked={entry.brood} disabled /></p>
                                     <p>Weiselzellen <input type="checkbox" checked={entry.queenCells} disabled /></p>
                                 </section>

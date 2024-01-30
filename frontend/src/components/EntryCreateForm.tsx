@@ -14,7 +14,7 @@ export default function EntryCreateForm() {
     const [inputHoneyHarvest, setInputHoneyHarvest] = useState<number>(0)
     const [inputVarroaTreatment, setInputVarroaTreatment] = useState<boolean>(false)
     const [inputQueen, setInputQueen] = useState<boolean>(false)
-    const [inputEgg, setInputEgg] = useState<boolean>(false)
+    const [inputEggs, setInputEggs] = useState<boolean>(false)
     const [inputBrood, setInputBrood] = useState<boolean>(false)
     const [inputQueenCells, setInputQueenCells] = useState<boolean>(false)
     const navigate = useNavigate();
@@ -44,7 +44,7 @@ export default function EntryCreateForm() {
     }
 
     function createInputEgg(event: ChangeEvent<HTMLInputElement>) {
-        setInputEgg(event.target.checked)
+        setInputEggs(event.target.checked)
     }
 
     function createInputBrood(event: ChangeEvent<HTMLInputElement>) {
@@ -86,7 +86,7 @@ export default function EntryCreateForm() {
                 honeyHarvest: inputHoneyHarvest,
                 varroaTreatment: inputVarroaTreatment,
                 queen: inputQueen,
-                egg: inputEgg,
+                eggs: inputEggs,
                 brood: inputBrood,
                 queenCells: inputQueenCells
             }
@@ -145,7 +145,7 @@ export default function EntryCreateForm() {
                 <p>
                     <input
                         type={"checkbox"}
-                        checked={inputEgg}
+                        checked={inputEggs}
                         onChange={createInputEgg}
                     /> Stifte
                 </p>
