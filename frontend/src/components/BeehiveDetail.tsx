@@ -5,7 +5,7 @@ import {useEffect, useState} from "react";
 import BeehiveDeleteButton from "./BeehiveDeleteButton.tsx";
 import BeehiveUpdateButton from "./BeehiveUpdateButton.tsx";
 import beehiveColonyIcon from "../assets/beehiveColonyIcon.png";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import getBeehiveById from "../service/apiService.ts";
 import axios from "axios";
 import {Entry} from "../types/Entry.ts";
@@ -18,11 +18,22 @@ export default function BeehiveDetail() {
     const {beehiveId} = useParams();
     const [beehive, setBeehive] = useState<Beehive | undefined | null>(undefined)
     const [entries, setEntries] = useState<Entry[]>([])
+    const navigate = useNavigate();
+
+    const deleteEntry = async (entryID: string)=> {
+        try {
+            await axios.delete("/api/entries/" + entryID);
+            //window.location.href = "/beehive/" + beehiveId;
+            navigate("/beehive/" + beehiveId, { replace: true });
+        } catch (error) {
+            alert("Fehler beim löschen");
+        }
+    }
 
     useEffect(() => {
         getBeehiveById(String(beehiveId), setBeehive);
         getAllEntriesForBeehive(String(beehiveId))
-    }, [beehiveId]);
+    }, [beehiveId, deleteEntry]);
 
     function getAllEntriesForBeehive(beehiveId: string) {
         axios.get("/api/entries/" + beehiveId)
@@ -31,15 +42,6 @@ export default function BeehiveDetail() {
                 setEntries(reversedEntries);
             })
             .catch((error: Error) => console.error(error));
-    }
-
-    const deleteEntry = async (entryID: string)=> {
-        try {
-            await axios.delete("/api/entries/" + entryID);
-            window.location.href = "/beehive/" + beehiveId;
-        } catch (error) {
-            alert("Fehler beim löschen");
-        }
     }
 
     if (beehive === undefined) {
