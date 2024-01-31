@@ -8,7 +8,7 @@ export type Entry = {
     honeyHarvest: number,
     varroaTreatment: boolean,
     queen: boolean,
-    egg: boolean,
+    eggs: boolean,
     brood: boolean,
     queenCells: boolean,
 }

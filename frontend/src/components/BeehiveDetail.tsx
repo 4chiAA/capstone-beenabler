@@ -1,4 +1,5 @@
 import "../stylesheets/BeehiveDetail.css"
+import "../stylesheets/Footer.css"
 import {Beehive} from "../types/Beehive.ts";
 import {useEffect, useState} from "react";
 import BeehiveDeleteButton from "./BeehiveDeleteButton.tsx";
@@ -9,6 +10,8 @@ import getBeehiveById from "../service/apiService.ts";
 import axios from "axios";
 import {Entry} from "../types/Entry.ts";
 import EntryCreateButton from "./EntryCreateButton.tsx";
+import deleteEntryIcon from "../assets/deleteEntryIcon.svg";
+import beehiveNucleusIcon from "../assets/beehiveNucleusIcon.png";
 
 export default function BeehiveDetail() {
 
@@ -30,6 +33,15 @@ export default function BeehiveDetail() {
             .catch((error: Error) => console.error(error));
     }
 
+    const deleteEntry = async (entryID: string)=> {
+        try {
+            await axios.delete("/api/entries/" + entryID);
+            window.location.href = "/beehive/" + beehiveId;
+        } catch (error) {
+            alert("Fehler beim löschen");
+        }
+    }
+
     if (beehive === undefined) {
         return ("lade...");
     } else if (beehive === null) {
@@ -40,7 +52,7 @@ export default function BeehiveDetail() {
         <div>
             <div className="beehive-container">
                 <div className="logo">
-                    <img src={beehiveColonyIcon} alt="Logo"/>
+                    <img src={beehive.type === "Wirtschaftsvolk" ? beehiveColonyIcon : beehiveNucleusIcon} alt="Logo" />
                 </div>
 
                 <div className="beehive-buttons">
@@ -70,10 +82,16 @@ export default function BeehiveDetail() {
                                 <section className="entry-sightings">
                                     <p>Varroabehandlung <input type="checkbox" checked={entry.varroaTreatment} disabled /></p>
                                     <p>Königin <input type="checkbox" checked={entry.queen} disabled /></p>
-                                    <p>Stifte <input type="checkbox" checked={entry.egg} disabled /></p>
+                                    <p>Stifte <input type="checkbox" checked={entry.eggs} disabled /></p>
                                     <p>Brut <input type="checkbox" checked={entry.brood} disabled /></p>
                                     <p>Weiselzellen <input type="checkbox" checked={entry.queenCells} disabled /></p>
                                 </section>
+                                <input
+                                    type="image"
+                                    src={deleteEntryIcon}
+                                    alt="Eintrag löschen"
+                                    onClick={() => entry.id && deleteEntry(entry.id)}
+                                />
                             </article>
                         ))}
                     </div>
@@ -83,7 +101,7 @@ export default function BeehiveDetail() {
                 <EntryCreateButton beehive={beehive}/>
             </div>
             <footer>
-                <div className="divider"></div>
+                <div className="divider-footer"></div>
                 <div className="footer-container">
                     <div className="left"></div>
                     <div className="mid"></div>

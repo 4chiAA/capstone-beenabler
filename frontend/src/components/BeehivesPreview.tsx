@@ -3,6 +3,7 @@ import {Beehive} from "../types/Beehive.ts";
 import {Link} from "react-router-dom";
 import BeehiveDeleteButton from "./BeehiveDeleteButton.tsx";
 import BeehiveUpdateButton from "./BeehiveUpdateButton.tsx";
+import beehiveNucleusIcon from "../assets/beehiveNucleusIcon.png";
 import beehiveColonyIcon from "../assets/beehiveColonyIcon.png";
 import {useEffect, useState} from "react";
 import axios from "axios";
@@ -29,26 +30,22 @@ export default function BeehivesPreview() {
         <div className="beehives-preview-container">
                 {beehivesPreview.map((beehive: Beehive) => (
                     <div className="beehives-preview" key={beehive.id}>
-                        <div className="left-part">
-                            <Link to={"/beehive/" + beehive.id}>
-                                <div className="logo">
-                                    <img src={beehiveColonyIcon} alt="Logo"/>
-                                </div>
-                            </Link>
-                            <div className="buttons">
-                                <BeehiveUpdateButton beehive={beehive}/>
-                                <BeehiveDeleteButton beehive={beehive}/>
+                        <Link to={"/beehive/" + beehive.id}>
+                            <div className="logo">
+                                <img src={beehive.type === "Wirtschaftsvolk" ? beehiveColonyIcon : beehiveNucleusIcon} alt="Logo" />
                             </div>
-                        </div>
-                        <article className="right-part">
+                        </Link>
+                        <article className="description">
                             <Link to={"/beehive/" + beehive.id} style={{textDecoration: "none", color: "inherit"}}>
-                                <div className="description">
                                     <h3>{beehive.name}</h3>
                                     <p>{beehive.type}</p>
                                     <p className="dateTime">Update: {beehive.dateTime}</p>
-                                </div>
                             </Link>
                         </article>
+                        <div className="buttons">
+                            <BeehiveUpdateButton beehive={beehive}/>
+                            <BeehiveDeleteButton beehive={beehive}/>
+                        </div>
                     </div>
                 ))}
         </div>

@@ -1,6 +1,7 @@
 package com.beenabler.backend.service;
 
 import com.beenabler.backend.exception.BeehiveNotFoundException;
+import com.beenabler.backend.exception.EntryNotFoundException;
 import com.beenabler.backend.model.Beehive;
 import com.beenabler.backend.model.Entry;
 import com.beenabler.backend.model.EntryDTO;
@@ -21,6 +22,7 @@ public class EntryService {
     private final IdService idService;
     private final DateTimeService dateTimeService;
 
+    private static final String ENTRY_NOT_FOUND_MESSAGE = "Entry not found";
     private static final String BEEHIVE_NOT_FOUND_MESSAGE = "Beehive not found";
 
     public List<Entry> getAllEntriesForBeehive(String beehiveId) {
@@ -46,6 +48,18 @@ public class EntryService {
             return newEntry;
         } else {
             throw new BeehiveNotFoundException(BEEHIVE_NOT_FOUND_MESSAGE);
+        }
+    }
+
+    public Entry deleteEntry(String id) throws EntryNotFoundException {
+        Optional<Entry> optionalEntry = entryRepo.findById(id);
+
+        if (optionalEntry.isPresent()) {
+            Entry deletedEntry = optionalEntry.get();
+            entryRepo.deleteById(id);
+            return deletedEntry;
+        } else {
+            throw new EntryNotFoundException(ENTRY_NOT_FOUND_MESSAGE);
         }
     }
 }

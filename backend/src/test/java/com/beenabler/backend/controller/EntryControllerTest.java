@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.util.List;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
@@ -106,4 +107,35 @@ class EntryControllerTest {
                 .andExpect(jsonPath("$.queenCells").value(false));
     }
 
+    @DirtiesContext
+    @Test
+    void deleteEntry_whenDeleteExistingEntry_thenDeleteentryById() throws Exception {
+        //GIVEN
+        BeehiveDTO beehiveDTO = new BeehiveDTO("First Beehive", "left", "Colony");
+        String beehiveDTOJson = objectMapper.writeValueAsString(beehiveDTO);
+
+        MvcResult resultBeehive = mockMvc.perform(post(BASE_URL_BEEHIVES)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(beehiveDTOJson))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn();
+
+        Beehive validBeehive = objectMapper.readValue(resultBeehive.getResponse().getContentAsString(), Beehive.class);
+        String beehiveId = validBeehive.id();
+
+        EntryDTO entryDTO = new EntryDTO("First entry", 15.0, 12.0, 6.0, false, true, true, true, false);
+        String entryDTOJson = objectMapper.writeValueAsString(entryDTO);
+
+        MvcResult resultEntry = mockMvc.perform(post(BASE_URL_ENTRIES + "/" + beehiveId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(entryDTOJson))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn();
+
+        Entry entry = objectMapper.readValue(resultEntry.getResponse().getContentAsString(), Entry.class);
+        String entryId = entry.id();
+        //WHEN & THEN
+        mockMvc.perform(delete("/api/entries/{entryId}", entryId))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
 }

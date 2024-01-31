@@ -5,7 +5,7 @@ export default function FooterHomePage() {
 
     return (
         <footer>
-            <div className="divider"></div>
+            <div className="divider-footer"></div>
             <div className="footer-container">
                 <div className="left"></div>
                 <div className="mid"></div>

@@ -1,6 +1,7 @@
 package com.beenabler.backend.service;
 
 import com.beenabler.backend.exception.BeehiveNotFoundException;
+import com.beenabler.backend.exception.EntryNotFoundException;
 import com.beenabler.backend.model.Beehive;
 import com.beenabler.backend.model.Entry;
 import com.beenabler.backend.model.EntryDTO;
@@ -83,5 +84,24 @@ class EntryServiceTest {
         when(beehiveRepo.findById("invalidId")).thenReturn(Optional.empty());
         //WHEN & THEN
         assertThrows(BeehiveNotFoundException.class, () -> entryService.addEntryForBeehive("invalidId", entryDTOTest));
+    }
+
+    @Test
+    void deleteEntry_whenDeleteEntryWithId_thenDeleteEntryById() throws EntryNotFoundException {
+        //GIVEN
+        when(entryRepo.findById(entryId)).thenReturn(Optional.of(entryTest));
+        Entry expected = entryTest;
+        //WHEN
+        Entry actual = entryService.deleteEntry(entryId);
+        //THEN
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void deleteEntry_whenDeleteWithNonExistingId_thenThrowException() {
+        //GIVEN
+        when(entryRepo.findById("randomId")).thenReturn(Optional.empty());
+        //WHEN & THEN
+        assertThrows(EntryNotFoundException.class, () -> entryService.deleteEntry("randomId"));
     }
 }

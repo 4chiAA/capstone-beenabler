@@ -1,6 +1,7 @@
 package com.beenabler.backend.controller;
 
 import com.beenabler.backend.exception.BeehiveNotFoundException;
+import com.beenabler.backend.exception.EntryNotFoundException;
 import com.beenabler.backend.model.Entry;
 import com.beenabler.backend.model.EntryDTO;
 import com.beenabler.backend.service.EntryService;
@@ -30,5 +31,10 @@ public class EntryController {
         } catch (BeehiveNotFoundException ex) {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @DeleteMapping("/{entryId}")
+    public void deleteEntry (@PathVariable String entryId) throws EntryNotFoundException {
+        entryService.deleteEntry(entryId);
     }
 }
