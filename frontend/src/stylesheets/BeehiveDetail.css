@@ -35,7 +35,7 @@
 .beehive-container .beehive-buttons {
     display: flex;
     justify-content: space-between;
-    column-gap: 10px;
+    column-gap: 15px;
     cursor: pointer;
 }
 

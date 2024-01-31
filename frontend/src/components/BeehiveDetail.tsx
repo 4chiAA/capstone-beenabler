@@ -1,4 +1,5 @@
 import "../stylesheets/BeehiveDetail.css"
+import "../stylesheets/Footer.css"
 import {Beehive} from "../types/Beehive.ts";
 import {useEffect, useState} from "react";
 import BeehiveDeleteButton from "./BeehiveDeleteButton.tsx";
@@ -33,16 +34,11 @@ export default function BeehiveDetail() {
     }
 
     const deleteEntry = async (entryID: string)=> {
-
-        const confirmation = window.confirm("Möchtest du diesen Eintrag wirklich löschen?");
-
-        if (confirmation) {
-            try {
-                await axios.delete("/api/entries/" + entryID);
-                window.location.href = "/beehive/" + beehiveId;
-            } catch (error) {
-                alert("Fehler beim löschen");
-            }
+        try {
+            await axios.delete("/api/entries/" + entryID);
+            window.location.href = "/beehive/" + beehiveId;
+        } catch (error) {
+            alert("Fehler beim löschen");
         }
     }
 
@@ -105,7 +101,7 @@ export default function BeehiveDetail() {
                 <EntryCreateButton beehive={beehive}/>
             </div>
             <footer>
-                <div className="divider"></div>
+                <div className="divider-footer"></div>
                 <div className="footer-container">
                     <div className="left"></div>
                     <div className="mid"></div>
