@@ -33,19 +33,19 @@ export default function BeehiveDetail() {
             .catch((error: Error) => console.error(error));
     }
 
-    const deleteEntry = async (entryID: string)=> {
-        try {
-            await axios.delete("/api/entries/" + entryID);
-            window.location.href = "/beehive/" + beehiveId;
-        } catch (error) {
-            alert("Fehler beim löschen");
-        }
-    }
-
     if (beehive === undefined) {
         return ("lade...");
     } else if (beehive === null) {
         return ("Kein Bienenvolk mit dieser ID vorhanden")
+    }
+
+    function deleteEntry(entryID:string){
+        axios.delete("/api/entries/"+entryID)
+            .then(() => {
+                getBeehiveById(String(beehiveId), setBeehive);
+                getAllEntriesForBeehive(String(beehiveId));
+            })
+            .catch(() => alert("Fehler beim löschen"));
     }
 
     return (
